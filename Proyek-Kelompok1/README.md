@@ -1,1 +1,0 @@
-nanti kita isi
