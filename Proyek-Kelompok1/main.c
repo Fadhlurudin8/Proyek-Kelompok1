@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-char *input_str(const char prompt[], int batas_panjang_input)
+char *input_str(const char string[], int batas_panjang_input)
 {
     char *input = malloc(batas_panjang_input + 1);
     if (input == NULL) {
@@ -10,7 +10,7 @@ char *input_str(const char prompt[], int batas_panjang_input)
         exit(EXIT_FAILURE);
     }
 
-    printf("%s", prompt);
+    printf("%s", string);
     if (fgets(input, batas_panjang_input + 1, stdin) == NULL) {
         free(input);
         return NULL;
@@ -68,7 +68,7 @@ int main()
 
     fclose(flogin);
 
-    printf("Data berhasil disimpan ke file.\n");
+    printf("Akun terverifikasi.\n");
 
     return 0;
 }
