@@ -108,9 +108,3 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-
-    printf("Akun terverifikasi. lakukan compile pada file main.c dan login dengan format:\n./main username password\n");
-    printf ("tes");
-
-    return 0;
-}
