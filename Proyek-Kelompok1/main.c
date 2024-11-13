@@ -12,7 +12,18 @@ char *input_str(const char identitas[], int batas_panjang_input)
     }
 
     // Input dari user
-    printf("%s: ", identitas); scanf(" %[^\n]", input);
+    printf("%s: ", identitas); fgets(input, batas_panjang_input + 2, stdin);
+    size_t len = strlen(input);
+    if (len > 0 && input[len - 1] == '\n') {
+        input[len - 1] = '\0';
+    }
+
+    // Memastikan input tidak kosong setelah newline dihapus
+    if (strlen(input) == 0) {
+        printf("ERROR! \n%s tidak boleh kosong\n", identitas);
+        free(input);
+        exit(EXIT_FAILURE);
+    }
 
     // Memastikan tidak ada spasi dalam input
     if (strchr(input, ' ') != NULL){
@@ -22,7 +33,7 @@ char *input_str(const char identitas[], int batas_panjang_input)
 
     // Memastikan input tidak melebihi batas panjang
     if (strlen(input) > batas_panjang_input) {
-        printf("SIGN UP FAILED: %s tidak boleh lebih dari %d karakter\n", identitas, batas_panjang_input);
+        printf("SIGN UP FAILED! \n%s tidak boleh lebih dari %d karakter\n", identitas, batas_panjang_input);
         free(input);
         exit(EXIT_FAILURE);
     }
@@ -35,7 +46,7 @@ FILE *buka_file(char *nama_file, char *mode_file)
 {
     FILE *file;
     if ((file = fopen(nama_file, mode_file)) == NULL){
-            printf("ERROR: Gagal membuka file!\n");
+            printf("ERROR! \nGagal membuka file!\n");
             exit(EXIT_FAILURE);
         }
     return file;
@@ -77,7 +88,7 @@ int main(int argc, char *argv[])
 
         fclose(flogin);
 
-        printf("SUCCESS: Akun terverifikasi.\n");
+        printf("SUCCESS! \nAkun terverifikasi\n");
 
         return EXIT_SUCCESS;
     }
@@ -89,9 +100,9 @@ int main(int argc, char *argv[])
         akun akunku;
         fread(&akunku, sizeof(akunku), 1, flogin);
 
-        if (strcmp(argv[0], akunku.username) == 1 || strcmp(argv[1], akunku.password) == 1)
+        if (strcmp(argv[1], akunku.username) != 0 || strcmp(argv[2], akunku.password) != 0)
         {   
-            printf("SIGN IN FAILED: Username/password anda salah \nBaca selengkapnya di README.md\n"); 
+            printf("SIGN IN FAILED! \nUsername/password anda salah \nBaca selengkapnya di README.md\n"); 
             return EXIT_FAILURE;
         }
         else
@@ -103,7 +114,7 @@ int main(int argc, char *argv[])
     }
         
     else{
-        printf("ERROR!\n Format login: ./main username password \n Baca selengkapnya di README.md"); // 
+        printf("ERROR! \nFormat login: ./main username password \nBaca selengkapnya di README.md\n"); // 
     }
 
     return 0;
