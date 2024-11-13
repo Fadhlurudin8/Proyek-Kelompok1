@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
@@ -108,8 +109,4 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-
-    printf("Akun terverifikasi. lakukan compile pada file main.c dan login dengan format:\n./main username password\n");
-
-    return 0;
 }
