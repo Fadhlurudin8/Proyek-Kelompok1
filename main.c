@@ -109,8 +109,35 @@ int main(int argc, char *argv[])
         {
             clear();
             printf("\t===== PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 =====\n");
-            // inti permainan disini
-        }
+                printf ("\n \t\t WHO WANTS TO BE A\n");
+                printf (" \t\t    MILLIONAIRE\n\n");
+
+                printf (" \t=================================\n");
+                printf (" \t*\tMulai Permainan (1)\t*\n");
+                printf (" \t*\t   Peraturan (2)\t*\n");
+                printf (" \t*\t    Keluar (3)\t\t*\n");
+                printf (" \t=================================");
+
+                int PlayerChoice;
+                printf ("\n\t>> ");
+                scanf ("%d", &PlayerChoice);
+
+    if (PlayerChoice == 1){
+        // isi game
+    }
+
+    else if (PlayerChoice == 2){
+        // rules
+    }
+
+    else if (PlayerChoice == 3){
+        //exit
+    }
+
+    else {
+        // kode tidak valid
+    }
+            
     }
         
     else{
