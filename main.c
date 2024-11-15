@@ -8,7 +8,7 @@ char *input_str(const char identitas[], int batas_panjang_input)
     char *input = malloc(batas_panjang_input + 1);
     if (input == NULL) {
         printf("ERROR! \nGagal mengalokasikan memori\n");
-        exit(EXIT_FAILURE);
+        exit(EXIT_FAILURE);//
     }
 
     // Input dari user
