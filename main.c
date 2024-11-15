@@ -109,35 +109,52 @@ int main(int argc, char *argv[])
         {
             clear();
             printf("\t===== PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 =====\n");
+
+            int GoBack;
+                do {
                 printf ("\n \t\t WHO WANTS TO BE A\n");
                 printf (" \t\t    MILLIONAIRE\n\n");
 
                 printf (" \t=================================\n");
-                printf (" \t*\tMulai Permainan (1)\t*\n");
-                printf (" \t*\t   Peraturan (2)\t*\n");
-                printf (" \t*\t    Keluar (3)\t\t*\n");
+                printf (" \t*\t  1. Mulai \t\t*\n");
+                printf (" \t*\t  2. Peraturan \t\t*\n");
+                printf (" \t*\t  3. Keluar \t\t*\n");
                 printf (" \t=================================");
 
                 int PlayerChoice;
                 printf ("\n\t>> ");
                 scanf ("%d", &PlayerChoice);
 
-    if (PlayerChoice == 1){
-        // isi game
-    }
+                    if (PlayerChoice == 1){
+                        // isi game
+                    }
 
-    else if (PlayerChoice == 2){
-        // rules
-    }
+                    else if (PlayerChoice == 2){
+                        printf ("\n\n==================================================\n\n");
+                        printf ("\t      |Peraturan Permainan|\n");
+                        printf ("   ============================================\n");
+                        printf ("   * 1. Pemain harus menjawab 10 pertanyaan   *\n");
+                        printf ("   *    pilihan ganda secara berurutan dengan *\n");
+                        printf ("   *    benar.                                *\n");
+                        printf ("   * 2. Pemain diberikan x detik untuk        *\n");
+                        printf ("   *    menjawab setiap soal.                 *\n");
+                        printf ("   * 3. Jika pemain menjawab salah, permainan *\n");
+                        printf ("   *    berakhir                              *\n");
+                        printf ("   ============================================\n");
+                        printf ("                                   Kembali >> ");
+                        scanf ("%d", &GoBack);
 
-    else if (PlayerChoice == 3){
-        //exit
-    }
+                    }
 
-    else {
-        // kode tidak valid
-    }
-            
+                    else if (PlayerChoice == 3){
+                        exit (0);
+                    }
+
+                    else {
+                        // kode tidak valid
+                    }
+                }
+                while (GoBack == 0);
     }
         
     else{
