@@ -19,7 +19,10 @@ char char_tanpa_buffer()
     
     #elif __linux__ || __unix__ || __APPLE__
         fflush(stdout);
-        initscr(); cbreak(); noecho();
+        initscr(); 
+        scrollok(stdscr, TRUE);
+        cbreak(); 
+        noecho();
         input = getch();
         endwin();
         return input;
