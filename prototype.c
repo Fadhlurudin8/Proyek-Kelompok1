@@ -33,7 +33,7 @@ char *input_str(const char identitas[], int batas_panjang_input)
     // Memastikan input tidak kosong
     if (strlen(input) == 0) {
         clear_terminal();
-        printf("\n=== PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n");
+        printf("\n  === PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n");
         printf("\n  ======================================\n");
         printf("  | ERROR: %s tidak boleh kosong |\n", identitas);
         printf("  ======================================\n\n");
@@ -44,7 +44,7 @@ char *input_str(const char identitas[], int batas_panjang_input)
     // Memastikan tidak ada spasi dalam input
     if (strchr(input, ' ') != NULL){
         clear_terminal();
-        printf("\n=== PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n");
+        printf("\n  === PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n");
         printf("\n  ==================================================\n");
         printf("  | SIGN UP FAILED: %s harus dalam satu kata |   \n", identitas);
         printf("  ==================================================\n\n");
@@ -55,7 +55,7 @@ char *input_str(const char identitas[], int batas_panjang_input)
     // Memastikan input tidak melebihi batas panjang
     if (strlen(input) > batas_panjang_input) {
         clear_terminal();
-        printf(" \n=== PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n");
+        printf(" \n  === PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n");
         printf("\n  ==============================================\n");
         printf("  | SIGN UP FAILED: %s tidak boleh lebih |\n", identitas);
         printf("  |                 dari %d karakter           |\n", batas_panjang_input);
@@ -94,13 +94,14 @@ int main(int argc, char *argv[])
     // Pembuatan akun
     if (argc == 1){
         clear_terminal();
-        printf("\n=== PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n");
+        printf("\n  === PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n");
         printf("\n                   |SIGN UP|                 \n\n");
-        printf("  ===========================================\n");
-        printf("  *     *Petunjuk:                          *\n");
-        printf("  *      Username maksimal 20 karakter      *\n");
-        printf("  *      Password maksimal 10 karakter      *\n");
-        printf("  ===========================================\n\n");
+        printf("  ===============================================\n");
+        printf("  *                  Petunjuk:                  *\n");
+        printf("  * Username dan password harus dalam satu kata *\n");
+        printf("  * (tanpa   spasi).   Username   maksimal   20 *\n");
+        printf("  * karakter dan password maksimal 10 karakter. *\n");
+        printf("  ===============================================\n\n");
         
         FILE *flogin = buka_file("database/login.bin", "wb"); // mengakses file biner dalam mode tulis
 
@@ -123,7 +124,7 @@ int main(int argc, char *argv[])
 
         // Akun berhasil dibuat
         clear_terminal();
-        printf("\n=== PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n");
+        printf("\n  === PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n");
         printf("\n  =======================================\n");
         printf("  | SIGN UP SUCCESS: Akun terverifikasi |\n");
         printf("  =======================================\n\n");
@@ -150,30 +151,32 @@ int main(int argc, char *argv[])
         
         else
         {
-            while (1) 
+            char PlayerChoice;
+            // Menampilkan opsi sampai user memilih opsi keluar
+            do 
             {
                 clear_terminal();
-                printf("\n=== PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n");
+                printf("\n  === PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n");
                 printf ("\n \t WHO WANTS TO BE A\n");
                 printf (" \t    MILLIONAIRE\n\n");
                 
-                // Fitur
+                // Opsi
                 printf ("  =================================\n");
                 printf ("  *          1. Mulai             *\n");
                 printf ("  *          2. Peraturan         *\n");
                 printf ("  *          3. Keluar            *\n");
                 printf ("  =================================\n ");
-                fflush(stdout);
                 
-                char PlayerChoice = char_tanpa_buffer();
-                // User menekan 1
+                PlayerChoice = char_tanpa_buffer();
+                // User memilih opsi mulai
                 if (PlayerChoice == '1'){
+                    clear_terminal();
                     break; // ganti dengan isi game
                 }
 
-                // User menekan 2
+                // User memilih opsi peraturan
                 else if (PlayerChoice == '2'){
-                    // Menampilkan aturan sampai user menekan y
+                    // Menampilkan aturan sampai user memilih kembali
                     do{
                         clear_terminal();
                         printf ("\n\n================================================\n\n");
@@ -192,21 +195,17 @@ int main(int argc, char *argv[])
                     } while(PlayerChoice != 'y');
                 }
 
-                // User menekan 3
-                else if (PlayerChoice == '3'){
-                    clear_terminal();
-                    break;
-                }
-
                 // User menekan selain 1, 2, dan 3
-                else {
+                else
                     continue;
-                }
-            }
+
+            } while(PlayerChoice != '3'); 
+            
+            clear_terminal();
         }
     }
 
-    // Argumen yang diberikan bukan 1 dan 3    
+    // Argumen yang diberikan bukan sebanyak 1 atau 3    
     else
     {
         clear_terminal();
