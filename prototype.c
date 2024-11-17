@@ -153,9 +153,6 @@ int main(int argc, char *argv[])
             while (1) 
             {
                 clear_terminal();
-                #ifdef  __linux__ || __unix__ || __APPLE__
-                initscr();
-                #endif
                 printf("\n=== PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n");
                 printf ("\n \t WHO WANTS TO BE A\n");
                 printf (" \t    MILLIONAIRE\n\n");
