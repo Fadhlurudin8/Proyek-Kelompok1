@@ -16,8 +16,6 @@ char char_tanpa_buffer()
     char input;
     #ifdef _WIN32
         input = _getch();
-        return input;
-    
     #elif __linux__ || __unix__ || __APPLE__
         struct termios oldt, newt;
         tcgetattr(STDIN_FILENO, &oldt);           // Simpan pengaturan terminal saat ini
@@ -27,6 +25,6 @@ char char_tanpa_buffer()
 
         input = getchar();                        // Ambil karakter dari input
         tcsetattr(STDIN_FILENO, TCSANOW, &oldt); // Kembalikan pengaturan terminal lama
-    
     #endif
+    return input;
 }
