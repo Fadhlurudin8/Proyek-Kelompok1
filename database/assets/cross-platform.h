@@ -23,6 +23,8 @@ char char_tanpa_buffer()
     {
         initscr(); cbreak(); noecho();
         input = getch();
+        refresh();
+        endwin();
         return input;
     }
 
