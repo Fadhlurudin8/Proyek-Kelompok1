@@ -20,10 +20,8 @@ char char_tanpa_buffer()
     #elif __linux__ || __unix__ || __APPLE__
         fflush(stdout);
         initscr(); cbreak(); noecho();
-        flushinp();
-        napms(100);  // Tunggu 100 milidetik
-        input = getch();
         endwin();
+        input = getch();
         return input;
     
     #endif
