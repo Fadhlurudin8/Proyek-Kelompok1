@@ -26,14 +26,14 @@ char *input_str(const char identitas[], int batas_panjang_input)
     printf("  %s: ", identitas); fgets(input, batas_panjang_input + 2, stdin);
     size_t len = strlen(input);
     
-    // Menghilangkan '\n' yang dibuat otomatis oleh fgets()
+    // Menghilangkan '\n' dari inputan fgets()
     if (len > 0 && input[len - 1] == '\n')
         input[len - 1] = '\0';
 
     // Memastikan input tidak kosong
     if (strlen(input) == 0) {
         clear_terminal();
-        printf(" \n=== PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n");
+        printf("\n=== PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n");
         printf("\n  ======================================\n");
         printf("  | ERROR: %s tidak boleh kosong |\n", identitas);
         printf("  ======================================\n\n");
@@ -44,10 +44,11 @@ char *input_str(const char identitas[], int batas_panjang_input)
     // Memastikan tidak ada spasi dalam input
     if (strchr(input, ' ') != NULL){
         clear_terminal();
-        printf(" \n=== PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n");
+        printf("\n=== PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n");
         printf("\n  ==================================================\n");
         printf("  | SIGN UP FAILED: %s harus dalam satu kata |   \n", identitas);
         printf("  ==================================================\n\n");
+        free(input);
         exit(1);
     }
 
@@ -77,6 +78,7 @@ FILE *buka_file(char *nama_file, char *mode_file)
             printf("  ==============================\n\n");
             exit(1);
         }
+
     return file;
 }
 
@@ -138,18 +140,20 @@ int main(int argc, char *argv[])
         akun akunku;
         fread(&akunku, sizeof(akunku), 1, flogin);
 
+        // Salah username/password
         if (strcmp(argv[1], akunku.username) != 0 || strcmp(argv[2], akunku.password) != 0)
         {   
             clear_terminal();
             printf("\nSIGN IN FAILED: Username/password anda salah \nBaca selengkapnya di README.md\n\n"); 
             return 1;
         }
+        
         else
         {
             while (1) 
             {
                 clear_terminal();
-                printf(" \n=== PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n");
+                printf("\n=== PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n");
                 printf ("\n \t WHO WANTS TO BE A\n");
                 printf (" \t    MILLIONAIRE\n\n");
                 
@@ -199,7 +203,8 @@ int main(int argc, char *argv[])
             }
         }
     }
-        
+
+    // Argumen yang diberikan bukan 1 dan 3    
     else
     {
         clear_terminal();
