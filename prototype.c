@@ -89,10 +89,6 @@ typedef struct
 
 int main(int argc, char *argv[])
 {
-    #ifdef __linux__ || __unix__ || __APPLE__
-        initscr(); cbreak(); noecho();
-    #endif
-    
     // Pembuatan akun
     if (argc == 1){
         clear_terminal();
@@ -209,10 +205,6 @@ int main(int argc, char *argv[])
         clear_terminal();
         printf("\nERROR: \nFormat login: ./<Nama Program> <Username> <Password> \nBaca selengkapnya di README.md\n\n"); // 
     }
-
-    #ifdef __linux__ || __unix__ || __APPLE__
-        endwin();
-    #endif
 
     return 0;
 }
