@@ -21,7 +21,7 @@ char char_tanpa_buffer()
     
     #elif __linux__ || __unix__ || __APPLE__
     {
-        init(); cbreak(); noecho();
+        initscr(); cbreak(); noecho();
         endwin();
         input = getch();
         return input;
