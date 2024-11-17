@@ -1,4 +1,3 @@
-#include <stdio.h>
 // Platform Windows
 #ifdef _WIN32
     #include <conio.h>
