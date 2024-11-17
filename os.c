@@ -5,9 +5,12 @@
 #endif
 
 int main(){
-
+    char input;
     #ifdef __linux__
         printf("Linux\n");
+        initscr(); cbreak(); noecho();
+        input = getch();
+        printf("%c", input);
     #endif
 
     #ifdef __unix__ 
