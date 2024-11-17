@@ -14,18 +14,14 @@ char char_tanpa_buffer()
 {
     char input;
     #ifdef _WIN32
-    {
         input = _getch();
         return input;
-    }
     
     #elif __linux__ || __unix__ || __APPLE__
-    {
         initscr(); cbreak(); noecho();
         input = getch();
         endwin();
         return input;
-    }
-
+    
     #endif
 }
