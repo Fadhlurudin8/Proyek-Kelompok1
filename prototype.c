@@ -141,7 +141,7 @@ int main(int argc, char *argv[])
         if (strcmp(argv[1], akunku.username) != 0 || strcmp(argv[2], akunku.password) != 0)
         {   
             clear_terminal();
-            printf("\nSIGN IN FAILED: \nUsername/password anda salah \nBaca selengkapnya di README.md\n\n"); 
+            printf("\nSIGN IN FAILED: Username/password anda salah \nBaca selengkapnya di README.md\n\n"); 
             return 1;
         }
         else
@@ -171,7 +171,7 @@ int main(int argc, char *argv[])
                     // Menampilkan aturan sampai user menekan y
                     do{
                         clear_terminal();
-                        printf ("\n\n==================================================\n\n");
+                        printf ("\n\n================================================\n\n");
                         printf ("             |Peraturan Permainan|\n");
                         printf ("  ============================================\n");
                         printf ("  * 1. Pemain harus menjawab 10 pertanyaan   *\n");
