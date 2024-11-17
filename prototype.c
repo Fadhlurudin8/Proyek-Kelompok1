@@ -194,6 +194,7 @@ int main(int argc, char *argv[])
 
                 // User menekan 3
                 else if (PlayerChoice == '3'){
+                    clear_terminal();
                     break;
                 }
 
