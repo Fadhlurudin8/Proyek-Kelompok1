@@ -151,10 +151,6 @@ int main(int argc, char *argv[])
         
         else
         {
-            #ifdef __linux__ || __unix__ || __APPLE__
-                initscr();
-                endwin();
-            #endif
             char PlayerChoice;
             // Menampilkan opsi sampai user memilih opsi keluar
             do 
