@@ -7,6 +7,7 @@
 int main(){
     char input;
     #ifdef __linux__
+        #include <ncurses.h>
         printf("Linux\n");
         initscr(); cbreak(); noecho();
         input = getch();
