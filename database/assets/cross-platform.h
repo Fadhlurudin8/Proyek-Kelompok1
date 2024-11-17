@@ -18,6 +18,7 @@ char char_tanpa_buffer()
         return input;
     
     #elif __linux__ || __unix__ || __APPLE__
+        fflush(stdout);
         initscr(); cbreak(); noecho();
         input = getch();
         endwin();
