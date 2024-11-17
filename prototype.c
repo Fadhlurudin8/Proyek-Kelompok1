@@ -182,7 +182,7 @@ int main(int argc, char *argv[])
                         printf ("  * 3. Jika pemain menjawab salah, permainan *\n");
                         printf ("  *    berakhir                              *\n");
                         printf ("  ============================================\n");
-                        printf ("                                    Kembali(Y)");
+                        printf ("                                    Kembali(y)");
                         PlayerChoice = char_tanpa_buffer();
                     } while(PlayerChoice != 'y');
                 }
