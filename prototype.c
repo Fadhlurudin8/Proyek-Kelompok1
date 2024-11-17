@@ -153,7 +153,7 @@ int main(int argc, char *argv[])
             while (1) 
             {
                 clear_terminal();
-                #ifdef #elif __linux__ || __unix__ || __APPLE__
+                #ifdef  __linux__ || __unix__ || __APPLE__
                 initscr();
                 #endif
                 printf("\n=== PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n");
