@@ -1,16 +1,20 @@
 #include <stdio.h>
+#include <ncurses.h>
 
-#ifdef __linux__
-    #include <ncurses.h>
-#endif
+// #ifdef __linux__
+// #endif
 
 int main(){
     char input;
     #ifdef __linux__
-        #include <ncurses.h>
         printf("Linux\n");
-        initscr(); cbreak(); noecho();
+        initscr(); 
+        cbreak(); 
+        noecho();
         input = getch();
+        refresh();
+        getch();
+        endwin();
         printf("%c", input);
     #endif
 
