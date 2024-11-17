@@ -163,6 +163,7 @@ int main(int argc, char *argv[])
                 printf ("  *          2. Peraturan         *\n");
                 printf ("  *          3. Keluar            *\n");
                 printf ("  =================================\n ");
+                fflush(stdout);
                 
                 char PlayerChoice = char_tanpa_buffer();
                 // User menekan 1
