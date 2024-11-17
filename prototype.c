@@ -5,8 +5,7 @@
 #include "database/assets/cross-platform.h"
 
 // Fungsi untuk membersihkan terminal
-#undef clear
-void clear()
+void clear_terminal()
     {printf("\e[1;1H\e[2J");} 
 
 /* Fungsi untuk menginput identitas
@@ -33,7 +32,7 @@ char *input_str(const char identitas[], int batas_panjang_input)
 
     // Memastikan input tidak kosong
     if (strlen(input) == 0) {
-        clear();
+        clear_terminal();
         printf(" \n=== PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n");
         printf("\n  ======================================\n");
         printf("  | ERROR: %s tidak boleh kosong |\n", identitas);
@@ -44,7 +43,7 @@ char *input_str(const char identitas[], int batas_panjang_input)
 
     // Memastikan tidak ada spasi dalam input
     if (strchr(input, ' ') != NULL){
-        clear();
+        clear_terminal();
         printf(" \n=== PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n");
         printf("\n  ==================================================\n");
         printf("  | SIGN UP FAILED: %s harus dalam satu kata |   \n", identitas);
@@ -54,7 +53,7 @@ char *input_str(const char identitas[], int batas_panjang_input)
 
     // Memastikan input tidak melebihi batas panjang
     if (strlen(input) > batas_panjang_input) {
-        clear();
+        clear_terminal();
         printf(" \n=== PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n");
         printf("\n  ==============================================\n");
         printf("  | SIGN UP FAILED: %s tidak boleh lebih |\n", identitas);
@@ -92,7 +91,7 @@ int main(int argc, char *argv[])
 {
     // Pembuatan akun
     if (argc == 1){
-        clear();
+        clear_terminal();
         printf("\n=== PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n");
         printf("\n                   |SIGN UP|                 \n\n");
         printf("  ===========================================\n");
@@ -121,7 +120,7 @@ int main(int argc, char *argv[])
         fclose(flogin);
 
         // Akun berhasil dibuat
-        clear();
+        clear_terminal();
         printf("\n=== PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n");
         printf("\n  =======================================\n");
         printf("  | SIGN UP SUCCESS: Akun terverifikasi |\n");
@@ -141,7 +140,7 @@ int main(int argc, char *argv[])
 
         if (strcmp(argv[1], akunku.username) != 0 || strcmp(argv[2], akunku.password) != 0)
         {   
-            clear();
+            clear_terminal();
             printf("\nSIGN IN FAILED: \nUsername/password anda salah \nBaca selengkapnya di README.md\n\n"); 
             return 1;
         }
@@ -149,7 +148,7 @@ int main(int argc, char *argv[])
         {
             while (1) 
             {
-                clear();
+                clear_terminal();
                 printf(" \n=== PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n");
                 printf ("\n \t WHO WANTS TO BE A\n");
                 printf (" \t    MILLIONAIRE\n\n");
@@ -171,7 +170,7 @@ int main(int argc, char *argv[])
                 else if (PlayerChoice == '2'){
                     // Menampilkan aturan sampai user menekan y
                     do{
-                        clear();
+                        clear_terminal();
                         printf ("\n\n==================================================\n\n");
                         printf ("             |Peraturan Permainan|\n");
                         printf ("  ============================================\n");
@@ -203,9 +202,10 @@ int main(int argc, char *argv[])
         
     else
     {
-        clear();
+        clear_terminal();
         printf("\nERROR: \nFormat login: ./<Nama Program> <Username> <Password> \nBaca selengkapnya di README.md\n\n"); // 
     }
 
     return 0;
+}
 }
