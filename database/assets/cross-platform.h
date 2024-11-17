@@ -19,8 +19,8 @@ char char_tanpa_buffer()
     
     #elif __linux__ || __unix__ || __APPLE__
         fflush(stdout);
-        napms(100);  // Tunggu 100 milidetik
         initscr(); cbreak(); noecho();
+        napms(100);  // Tunggu 100 milidetik
         input = getch();
         endwin();
         return input;
