@@ -33,14 +33,14 @@ int main() {
     Pertanyaan soal[10] = {
         {"Ibukota Indonesia? \n a. Banten\n b. Jakarta\n c. Medan\n d. Surabaya", {"b"}},
         {"100 x 3 / 2 = ? \n a. 160\n b. 150\n c. 120\n d. 130", {"b"}},
-        {"Planet terbesar di tata surya? \n a. Merkurius\n ", {"Jupiter"}},
-        {"Hewan tercepat di dunia?\n ", {"Cheetah"}},
-        {"Lambang kimia untuk air?\n ", {"H2O"}},
-        {"5 x 2 + 10 / 2 = ?\n ", {"15"}},
-        {"Gunung tertinggi di dunia?\n ", {"gunung everest"}},
-        {"Danau terbesar di dunia?\n ", {"kaspia"}},
-        {"Siapa nama presiden pertama Republik Indonesia?\n ", {"Ir. Soekarno"}},
-        {"Apa nama ibu kota negara Australia?\n ", {"Canberra"}}
+        {"Planet terbesar di tata surya? \n a. Merkurius\n b. Pluto\n c. Saturnus\n d. Jupiter", {"d"}},
+        {"Hewan tercepat di dunia?\n a. Harimau\n b. Macan\n c. Singa\n d. Cheetah", {"d"}},
+        {"Lambang kimia untuk air?\n a. NaCl\n b. NaOH\n c. H2O\n d. O2", {"c"}},
+        {"5 x 2 + 10 / 2 = ?\n a. 16\n b. 15\n c. 17\n d. 12", {"15"}},
+        {"Gunung tertinggi di dunia?\n a. Bromo\n b. Everest\n c. Kangchenjunga\n d. Lhotse", {"b"}},
+        {"Danau terbesar di dunia?\n a. Superior\n b. Huron\n c. Kaspia\n d. Sentani", {"c"}},
+        {"Siapa nama presiden pertama Republik Indonesia?\n a. Megawati Soekarnoputri\n b. Mohammad Hatta\n c. B.J. Habibie\n d. Ir. Soekarno", {"d"}},
+        {"Apa nama ibu kota negara Australia?\n a. Sydney\n b. Melbourne\n c. Canberra\n d. Perth", {"c"}}
     };
     
     int uang = 0, maxSoal = 10;
@@ -76,7 +76,7 @@ int main() {
             }
         if (jawabanDiberikan) {
         if (cekJawaban(jawabanPengguna, soal[idx].jawaban, 3)) {
-            uang++ ;
+            uang += 10 ;
             printf("Benar! Uang Anda   : %d Juta\n\n", uang);
         } else {
             printf("Salah! Anda tereliminasi.\n");
