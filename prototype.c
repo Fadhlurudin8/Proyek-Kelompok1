@@ -27,14 +27,12 @@ char *input_str(const char identitas[], int batas_panjang_input)
     size_t len = strlen(input);
     
     // Menghilangkan '\n' dari inputan fgets()
-    if (len > 0 && input[len - 1] == '\n')
-        input[len - 1] = '\0';
+    input[strcspn(input, "\n")] = 0;
 
     // Memastikan input tidak kosong
     if (strlen(input) == 0) {
         clear_terminal();
-        printf("\n  === PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n\n");
-        printf("  ======================================\n");
+        printf("\n  ======================================\n");
         printf("  | ERROR: %s tidak boleh kosong |\n", identitas);
         printf("  ======================================\n\n");
         free(input);
@@ -44,8 +42,7 @@ char *input_str(const char identitas[], int batas_panjang_input)
     // Memastikan tidak ada spasi dalam input
     if (strchr(input, ' ') != NULL){
         clear_terminal();
-        printf("\n  === PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n\n");
-        printf("  ==================================================\n");
+        printf("\n  ==================================================\n");
         printf("  | SIGN UP FAILED: %s harus dalam satu kata |   \n", identitas);
         printf("  ==================================================\n\n");
         free(input);
@@ -55,8 +52,7 @@ char *input_str(const char identitas[], int batas_panjang_input)
     // Memastikan input tidak melebihi batas panjang
     if (strlen(input) > batas_panjang_input) {
         clear_terminal();
-        printf(" \n  === PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n\n");
-        printf("  ==============================================\n");
+        printf("\n  ==============================================\n");
         printf("  | SIGN UP FAILED: %s tidak boleh lebih |\n", identitas);
         printf("  |                 dari %d karakter           |\n", batas_panjang_input);
         printf("  ==============================================\n\n");
@@ -73,7 +69,7 @@ FILE *buka_file(char *nama_file, char *mode_file)
     FILE *file;
     // File gagal diakses
     if ((file = fopen(nama_file, mode_file)) == NULL){
-            printf("  ==============================\n");
+            printf("\n  ==============================\n");
             printf("  | ERROR: Gagal membuka file! |\n");
             printf("  ==============================\n\n");
             exit(1);
@@ -145,7 +141,7 @@ int main(int argc, char *argv[])
         if (strcmp(argv[1], akunku.username) != 0 || strcmp(argv[2], akunku.password) != 0)
         {   
             clear_terminal();
-            printf("\nSIGN IN FAILED: Username/password anda salah \nBaca selengkapnya di README.md\n\n"); 
+            printf("\n  SIGN IN FAILED: Username/password anda salah\n  Baca selengkapnya di README.md\n\n"); 
             fclose(flogin);
             return 1;
         }
@@ -154,20 +150,19 @@ int main(int argc, char *argv[])
         {
             char PlayerChoice;
             // Menampilkan opsi sampai user memilih opsi keluar
+            clear_terminal();
+            printf("\n  === PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n\n");
+            printf ("          WHO WANTS TO BE A\n");
+            printf ("             MILLIONAIRE\n\n");
+            
+            // Opsi
+            printf ("  =================================\n");
+            printf ("  *          1. Mulai             *\n");
+            printf ("  *          2. Peraturan         *\n");
+            printf ("  *          3. Keluar            *\n");
+            printf ("  =================================\n ");
             do 
-            {
-                clear_terminal();
-                printf("\n  === PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n\n");
-                printf ("          WHO WANTS TO BE A\n");
-                printf ("             MILLIONAIRE\n\n");
-                
-                // Opsi
-                printf ("  =================================\n");
-                printf ("  *          1. Mulai             *\n");
-                printf ("  *          2. Peraturan         *\n");
-                printf ("  *          3. Keluar            *\n");
-                printf ("  =================================\n ");
-                
+            {    
                 PlayerChoice = char_tanpa_buffer();
                 // User memilih opsi mulai
                 if (PlayerChoice == '1'){
@@ -178,22 +173,36 @@ int main(int argc, char *argv[])
                 // User memilih opsi peraturan
                 else if (PlayerChoice == '2'){
                     // Menampilkan aturan sampai user memilih kembali
+                    clear_terminal();
+                    printf ("\n\n================================================\n\n");
+                    printf ("             |Peraturan Permainan|\n");
+                    printf ("  ============================================\n");
+                    printf ("  * 1. Pemain harus menjawab 10 pertanyaan   *\n");
+                    printf ("  *    pilihan ganda secara berurutan dengan *\n");
+                    printf ("  *    benar.                                *\n");
+                    printf ("  * 2. Pemain diberikan x detik untuk        *\n");
+                    printf ("  *    menjawab setiap soal.                 *\n");
+                    printf ("  * 3. Jika pemain menjawab salah, permainan *\n");
+                    printf ("  *    berakhir                              *\n");
+                    printf ("  ============================================\n");
+                    printf ("                                    Kembali(y)\n");
                     do{
-                        clear_terminal();
-                        printf ("\n\n================================================\n\n");
-                        printf ("             |Peraturan Permainan|\n");
-                        printf ("  ============================================\n");
-                        printf ("  * 1. Pemain harus menjawab 10 pertanyaan   *\n");
-                        printf ("  *    pilihan ganda secara berurutan dengan *\n");
-                        printf ("  *    benar.                                *\n");
-                        printf ("  * 2. Pemain diberikan x detik untuk        *\n");
-                        printf ("  *    menjawab setiap soal.                 *\n");
-                        printf ("  * 3. Jika pemain menjawab salah, permainan *\n");
-                        printf ("  *    berakhir                              *\n");
-                        printf ("  ============================================\n");
-                        printf ("                                    Kembali(y)");
                         PlayerChoice = char_tanpa_buffer();
-                    } while(PlayerChoice != 'y');
+                        if (PlayerChoice == 'y')
+                        {
+                            clear_terminal();
+                            printf("\n  === PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n\n");
+                            printf ("          WHO WANTS TO BE A\n");
+                            printf ("             MILLIONAIRE\n\n");
+                            
+                            // Opsi
+                            printf ("  =================================\n");
+                            printf ("  *          1. Mulai             *\n");
+                            printf ("  *          2. Peraturan         *\n");
+                            printf ("  *          3. Keluar            *\n");
+                            printf ("  =================================\n ");
+                        }
+                    } while(PlayerChoice != 'y');          
                 }
 
                 // User menekan selain 1, 2, dan 3
@@ -214,7 +223,7 @@ int main(int argc, char *argv[])
     else
     {
         clear_terminal();
-        printf("\nERROR: \nFormat login: ./<Nama Program> <Username> <Password> \nBaca selengkapnya di README.md\n\n"); // 
+        printf("\n  ERROR:\n  Format login: ./<Nama Program> <Username> <Password>\n  Baca selengkapnya di README.md\n\n"); // 
     }
 
     return 0;
