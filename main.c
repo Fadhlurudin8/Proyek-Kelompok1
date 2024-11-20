@@ -93,10 +93,10 @@ int main(int argc, char *argv[])
         printf("\n  === PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n\n");
         printf("                     |SIGN UP|                 \n\n");
         printf("  ===============================================\n");
-        printf("  *                  Petunjuk:                  *\n");
-        printf("  * Username dan password harus dalam satu kata *\n");
-        printf("  * (tanpa   spasi).   Username   maksimal   20 *\n");
-        printf("  * karakter dan password maksimal 10 karakter. *\n");
+        printf("  |                  Petunjuk:                  |\n");
+        printf("  | Username dan password harus dalam satu kata |\n");
+        printf("  | (tanpa   spasi).   Username   maksimal   20 |\n");
+        printf("  | karakter dan password maksimal 10 karakter. |\n");
         printf("  ===============================================\n\n");
         
         FILE *flogin = buka_file("database/login.bin", "wb"); // mengakses file biner dalam mode tulis
@@ -157,9 +157,9 @@ int main(int argc, char *argv[])
             
             // Opsi
             printf ("  =================================\n");
-            printf ("  *          1. Mulai             *\n");
-            printf ("  *          2. Peraturan         *\n");
-            printf ("  *          3. Keluar            *\n");
+            printf ("  |          1. Mulai             |\n");
+            printf ("  |          2. Peraturan         |\n");
+            printf ("  |          3. Keluar            |\n");
             printf ("  =================================\n ");
             do 
             {    
@@ -174,16 +174,16 @@ int main(int argc, char *argv[])
                 else if (PlayerChoice == '2'){
                     // Menampilkan aturan sampai user memilih kembali
                     clear_terminal();
-                    printf ("\n\n================================================\n\n");
+        
                     printf ("             |Peraturan Permainan|\n");
                     printf ("  ============================================\n");
-                    printf ("  * 1. Pemain harus menjawab 10 pertanyaan   *\n");
-                    printf ("  *    pilihan ganda secara berurutan dengan *\n");
-                    printf ("  *    benar.                                *\n");
-                    printf ("  * 2. Pemain diberikan x detik untuk        *\n");
-                    printf ("  *    menjawab setiap soal.                 *\n");
-                    printf ("  * 3. Jika pemain menjawab salah, permainan *\n");
-                    printf ("  *    berakhir                              *\n");
+                    printf ("  | 1. Pemain harus menjawab 12 pertanyaan   |\n");
+                    printf ("  |    pilihan ganda secara berurutan dengan |\n");
+                    printf ("  |    benar.                                |\n");
+                    printf ("  | 2. Pemain diberikan x detik untuk        |\n");
+                    printf ("  |    menjawab setiap soal.                 |\n");
+                    printf ("  | 3. Jika pemain menjawab salah, permainan |\n");
+                    printf ("  |    berakhir                              |\n");
                     printf ("  ============================================\n");
                     printf ("                                    Kembali(y)\n");
                     do{
@@ -197,9 +197,9 @@ int main(int argc, char *argv[])
                             
                             // Opsi
                             printf ("  =================================\n");
-                            printf ("  *          1. Mulai             *\n");
-                            printf ("  *          2. Peraturan         *\n");
-                            printf ("  *          3. Keluar            *\n");
+                            printf ("  |          1. Mulai             |\n");
+                            printf ("  |          2. Peraturan         |\n");
+                            printf ("  |          3. Keluar            |\n");
                             printf ("  =================================\n ");
                         }
                     } while(PlayerChoice != 'y');          
