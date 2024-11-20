@@ -1,0 +1,108 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
+#include <unistd.h>
+
+typedef struct {
+    char soal[100];
+    char jawaban[20];
+} Pertanyaan;
+
+// Fungsi untuk mendapatkan soal acak
+int getSoalAcak(int jumlahSoal, int used[]) {
+    int idx;
+    do {
+        idx = rand() % jumlahSoal;
+    } while (used[idx] == 1);  // Memastikan soal belum pernah dipakai
+    used[idx] = 1;
+    return idx;
+}
+int i;
+int cekJawaban(char jawabanPengguna[], char jawabanBenar[][20], int jumlahJawaban) {
+    for (i = 0; i < jumlahJawaban; i++) {
+        if (strcasecmp(jawabanPengguna, jawabanBenar[i]) == 0) {
+            return 1;  // Jawaban benar
+        }
+    }
+    return 0;
+}
+
+int main() {
+    srand(time(NULL));  // Inisialisasi angka acak berdasarkan waktu
+    Pertanyaan soal[15] = {
+        {"Mata uang Kamboja? \n a. Riyal\n b. Riel\n c. Real\n d. Rand", {"b"}},
+        {"(36 x 2) / 0 = ? \n a. 0\n b. Tak terdefinisi\n c. Tak hingga\n d. 1", {"b"}},
+        {"Jumlah kotak hitam papan catur? \n a. 68\n b. 34\n c. 64\n d. 32", {"d"}},
+        {"Hewan tercepat di dunia?\n a. Harimau\n b. Macan\n c. Singa\n d. Cheetah", {"d"}},
+        {"Ibu kota Kalimantan Barat?\n a. Palangkaraya\n b. Banjarbaru\n c. Pontianak\n d. Samarinda", {"c"}},
+        {"Jumlah provinsi di Indonesia?\n a. 38\n b. 34\n c. 40\n d. 32", {"a"}},
+        {"Kota terpadat di dunia?\n a. Shanghai, China\n b. Tokyo, Jepang\n c. Mumbai, India\n d. Beijing, China", {"b"}},
+        {"Danau terbesar di dunia?\n a. Superior\n b. Huron\n c. Kaspia\n d. Sentani", {"c"}},
+        {"Hewan terbesar di dunia?\n a. Kucing\n b. Beruang kodiak\n c. Gajah\n d. Paus biru", {"d"}},
+        {"Hari Kesaktian Pancasila?\n a. 18 Agustus\n b. 22 Juni\n c. 1 Oktober\n d. 1 Juni", {"c"}},
+        {"Sungai terpanjang di Indonesia? \n a. Kapuas\n b. Nil\n c. Amazon\n d. Mahakam\n", {"a"}},
+        {"Negara terkaya di dunia? \n a. Qatar\n b. Luxemburg\n c. Makau\n d. China", {"b"}},
+        {"Ibu kota Prancis? \n a. Berlin\n b. Madrid\n c. Paris\n d. Roma", {"c"}},
+		{"Planet terjauh dari bumi? a. Uranus\n b. Saturnus\n c. Neptunus\n d. Merkurius", {"c"}},
+		{"Siapakah bapak ekonomi? \n a. Adam Watson\n b. Karl Marx\n c. Thomas Edison\n d. Adam Smith", {"d"}}
+    };
+    
+    int uang = 0, maxSoal = 15;
+    int used[10] = {0};  // Menyimpan soal yang sudah dipakai
+
+    printf("Selamat datang di Game Quiz!\n");
+    printf("Jawab 15 soal dengan benar untuk memenangkan permainan.\n");
+    printf("Anda hanya memiliki waktu 15 detik untuk setiap soal.\n");
+    printf("Jika salah atau waktu habis, Anda akan tereliminasi.\n\n");
+
+    for (i = 0; i < maxSoal; i++) {
+        int idx = getSoalAcak(maxSoal, used);
+        char jawabanPengguna[20];
+
+        printf("===================================================\n");
+        printf("Soal  %d            : %s \n", i + 1, soal[idx].soal);
+        printf("Jawaban Anda       : ", jawabanPengguna);
+        fgets(jawabanPengguna, sizeof(jawabanPengguna), stdin);
+        jawabanPengguna[strcspn(jawabanPengguna, "\n")] = 0;  // Menghilangkan karakter newline
+
+        // Catat waktu saat soal dimulai
+        time_t waktuMulai = time(NULL);
+        time_t waktuSekarang;
+
+        // Tunggu jawaban dengan batas waktu 15 detik
+        int jawabanDiberikan = 0;  // Flag apakah jawaban diberikan tepat waktu
+        while (1) {
+            waktuSekarang = time(NULL);
+            if (waktuSekarang - waktuMulai >= 15) {
+                printf("Waktu habis! Anda tereliminasi.\n");
+                printf("Skor akhir: %d\n", uang);
+                return 0;  // Game berakhir jika waktu habis
+            }
+        if (jawabanDiberikan) {
+        if (cekJawaban(jawabanPengguna, soal[idx].jawaban, 3)) {
+            uang += 10 ;
+            printf("Benar! Uang Anda   : %d Juta\n\n", uang);
+        } else {
+            printf("Salah! Anda tereliminasi.\n");
+            printf("Skor akhir      : %d Juta\n", uang);
+            printf("Silakan coba lagi!\n");
+            printf("===================================================\n");
+            return 0;  // Game berakhir jika salah
+        }
+    }
+
+    // Jeda 5 detik sebelum soal berikutnya
+        printf("Jeda 5 detik sebelum soal berikutnya...\n\n");
+        sleep(5);
+    }
+
+    // Jika semua soal dijawab benar
+    printf("Selamat! Anda berhasil menjawab semua soal dengan benar!\n");
+    printf("Skor akhir: %d\n", uang);
+    printf("===================================================\n");
+
+    return 0;
+    }
+
+}
