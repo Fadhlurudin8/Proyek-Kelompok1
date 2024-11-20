@@ -46,21 +46,21 @@ int main() {
     char jawabanPengguna;
     
     Pertanyaan kumpulanSoal[15] = {
-        {"Mata uang Kamboja? \n a. Riyal\n b. Riel\n c. Real\n d. Rand", {"b"}},
-        {"(36 x 2) / 0 = ? \n a. 0\n b. Tak terdefinisi\n c. Tak hingga\n d. 1", {"b"}},
-        {"Jumlah kotak hitam papan catur? \n a. 68\n b. 34\n c. 64\n d. 32", {"d"}},
-        {"Hewan tercepat di dunia?\n a. Harimau\n b. Macan\n c. Singa\n d. Cheetah", {"d"}},
-        {"Ibu kota Kalimantan Barat?\n a. Palangkaraya\n b. Banjarbaru\n c. Pontianak\n d. Samarinda", {"c"}},
-        {"Jumlah provinsi di Indonesia?\n a. 38\n b. 34\n c. 40\n d. 32", {"a"}},
-        {"Kota terpadat di dunia?\n a. Shanghai, China\n b. Tokyo, Jepang\n c. Mumbai, India\n d. Beijing, China", {"b"}},
-        {"Danau terbesar di dunia?\n a. Superior\n b. Huron\n c. Kaspia\n d. Sentani", {"c"}},
-        {"Hewan terbesar di dunia?\n a. Kucing\n b. Beruang kodiak\n c. Gajah\n d. Paus biru", {"d"}},
-        {"Hari Kesaktian Pancasila?\n a. 18 Agustus\n b. 22 Juni\n c. 1 Oktober\n d. 1 Juni", {"c"}},
-        {"Sungai terpanjang di Indonesia? \n a. Kapuas\n b. Nil\n c. Amazon\n d. Mahakam\n", {"a"}},
-        {"Negara terkaya di dunia? \n a. Qatar\n b. Luxemburg\n c. Makau\n d. China", {"b"}},
-        {"Ibu kota Prancis? \n a. Berlin\n b. Madrid\n c. Paris\n d. Roma", {"c"}},
-		{"Planet terjauh dari bumi? a. Uranus\n b. Saturnus\n c. Neptunus\n d. Merkurius", {"c"}},
-		{"Siapakah bapak ekonomi? \n a. Adam Watson\n b. Karl Marx\n c. Thomas Edison\n d. Adam Smith", {"d"}}
+        {"Mata uang Kamboja? \n a. Riyal\n b. Riel\n c. Real\n d. Rand", 'b'},
+        {"(36 x 2) / 0 = ? \n a. 0\n b. Tak terdefinisi\n c. Tak hingga\n d. 1", 'b'},
+        {"Jumlah kotak hitam papan catur? \n a. 68\n b. 34\n c. 64\n d. 32", 'd'},
+        {"Hewan tercepat di dunia?\n a. Harimau\n b. Macan\n c. Singa\n d. Cheetah", 'd'},
+        {"Ibu kota Kalimantan Barat?\n a. Palangkaraya\n b. Banjarbaru\n c. Pontianak\n d. Samarinda", 'c'},
+        {"Jumlah provinsi di Indonesia?\n a. 38\n b. 34\n c. 40\n d. 32", 'a'},
+        {"Kota terpadat di dunia?\n a. Shanghai, China\n b. Tokyo, Jepang\n c. Mumbai, India\n d. Beijing, China", 'b'},
+        {"Danau terbesar di dunia?\n a. Superior\n b. Huron\n c. Kaspia\n d. Sentani", 'c'},
+        {"Hewan terbesar di dunia?\n a. Kucing\n b. Beruang kodiak\n c. Gajah\n d. Paus biru", 'd'},
+        {"Hari Kesaktian Pancasila?\n a. 18 Agustus\n b. 22 Juni\n c. 1 Oktober\n d. 1 Juni", 'c'},
+        {"Sungai terpanjang di Indonesia? \n a. Kapuas\n b. Nil\n c. Amazon\n d. Mahakam\n", 'a'},
+        {"Negara terkaya di dunia? \n a. Qatar\n b. Luxemburg\n c. Makau\n d. China", 'b'},
+        {"Ibu kota Prancis? \n a. Berlin\n b. Madrid\n c. Paris\n d. Roma", 'c'},
+		{"Planet terjauh dari bumi? a. Uranus\n b. Saturnus\n c. Neptunus\n d. Merkurius", 'c'},
+		{"Siapakah bapak ekonomi? \n a. Adam Watson\n b. Karl Marx\n c. Thomas Edison\n d. Adam Smith", 'd'}
     };
 
     for (int i = 0; i < maxSoal; i++) {
