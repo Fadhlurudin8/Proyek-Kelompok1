@@ -1,36 +1,51 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 #include <string.h>
+#include <time.h>
 #include <unistd.h>
+#include "cross-platform.h"
 
-typedef struct {
-    char soal[100];
-    char jawaban[20];
-} Pertanyaan;
+void clear_terminal()
+    {printf("\e[1;1H\e[2J");} 
 
-// Fungsi untuk mendapatkan soal acak
-int getSoalAcak(int jumlahSoal, int used[]) {
-    int idx;
-    do {
-        idx = rand() % jumlahSoal;
-    } while (used[idx] == 1);  // Memastikan soal belum pernah dipakai
-    used[idx] = 1;
+    /* Fungsi ini mengisi nilai satu sampai dengan jumlahElemen ke dalam 
+   sebuah pointer array dengan urutan acak. Berguna untuk membuat pemilihan
+   soal secara acak */
+int *ptrElemenAcak(int jumlahElemen) {
+    int *idx = malloc(jumlahElemen * sizeof(int));
+    int penanda[jumlahElemen]; // Array penanda
+
+    for (int i = 0; i < jumlahElemen; i++) {
+        penanda[i] = 0; // Inisialisasi ke 0
+    }
+
+    srand(time(NULL));
+    for (int i = 0; i < jumlahElemen; i++) {
+        int indexAcak;
+        do {
+            indexAcak = rand() % jumlahElemen; // Menghasilkan angka acak
+        } while (penanda[indexAcak] == 1); // Ulangi jika angka sudah digunakan
+
+        idx[i] = indexAcak;       // Simpan angka acak yang valid
+        penanda[indexAcak] = 1;   // Menandai angka yang sudah digunakan
+    }
+
     return idx;
 }
-int i;
-int cekJawaban(char jawabanPengguna[], char jawabanBenar[][20], int jumlahJawaban) {
-    for (i = 0; i < jumlahJawaban; i++) {
-        if (strcasecmp(jawabanPengguna, jawabanBenar[i]) == 0) {
-            return 1;  // Jawaban benar
-        }
-    }
-    return 0;
-}
+
+typedef struct {
+    char *soal;
+    char jawaban;
+} Pertanyaan;
 
 int main() {
-    srand(time(NULL));  // Inisialisasi angka acak berdasarkan waktu
-    Pertanyaan soal[15] = {
+    int uang = 0;
+    int maxSoal = 10;
+    int *idx = ptrElemenAcak(maxSoal);
+    const short int opsi[] = {'a', 'b', 'c', 'd'};
+    char jawabanPengguna;
+    
+    Pertanyaan kumpulanSoal[15] = {
         {"Mata uang Kamboja? \n a. Riyal\n b. Riel\n c. Real\n d. Rand", {"b"}},
         {"(36 x 2) / 0 = ? \n a. 0\n b. Tak terdefinisi\n c. Tak hingga\n d. 1", {"b"}},
         {"Jumlah kotak hitam papan catur? \n a. 68\n b. 34\n c. 64\n d. 32", {"d"}},
@@ -47,62 +62,60 @@ int main() {
 		{"Planet terjauh dari bumi? a. Uranus\n b. Saturnus\n c. Neptunus\n d. Merkurius", {"c"}},
 		{"Siapakah bapak ekonomi? \n a. Adam Watson\n b. Karl Marx\n c. Thomas Edison\n d. Adam Smith", {"d"}}
     };
-    
-    int uang = 0, maxSoal = 15;
-    int used[10] = {0};  // Menyimpan soal yang sudah dipakai
 
-    printf("Selamat datang di Game Quiz!\n");
-    printf("Jawab 15 soal dengan benar untuk memenangkan permainan.\n");
-    printf("Anda hanya memiliki waktu 15 detik untuk setiap soal.\n");
-    printf("Jika salah atau waktu habis, Anda akan tereliminasi.\n\n");
-
-    for (i = 0; i < maxSoal; i++) {
-        int idx = getSoalAcak(maxSoal, used);
-        char jawabanPengguna[20];
-
+    for (int i = 0; i < maxSoal; i++) {
+        clear_terminal();
         printf("===================================================\n");
-        printf("Soal  %d            : %s \n", i + 1, soal[idx].soal);
-        printf("Jawaban Anda       : ", jawabanPengguna);
-        fgets(jawabanPengguna, sizeof(jawabanPengguna), stdin);
-        jawabanPengguna[strcspn(jawabanPengguna, "\n")] = 0;  // Menghilangkan karakter newline
+        printf("  Soal %d:\n  %s \n", i + 1, kumpulanSoal[idx[i]].soal);
+        printf("  >> ");
 
-        // Catat waktu saat soal dimulai
-        time_t waktuMulai = time(NULL);
-        time_t waktuSekarang;
+        while (1) {  
+            jawabanPengguna = '0';
+            jawabanPengguna = char_tanpa_buffer();
 
-        // Tunggu jawaban dengan batas waktu 15 detik
-        int jawabanDiberikan = 0;  // Flag apakah jawaban diberikan tepat waktu
-        while (1) {
-            waktuSekarang = time(NULL);
-            if (waktuSekarang - waktuMulai >= 15) {
-                printf("Waktu habis! Anda tereliminasi.\n");
-                printf("Skor akhir: %d\n", uang);
-                return 0;  // Game berakhir jika waktu habis
+            int flag = 0;
+            for (int i = 0; i < sizeof(opsi)/sizeof(opsi[0]); i++)
+            {    
+                if (jawabanPengguna == opsi[i])
+                {
+                    flag = 1;
+                    break;
+                }
             }
-        if (jawabanDiberikan) {
-        if (cekJawaban(jawabanPengguna, soal[idx].jawaban, 3)) {
-            uang += 10 ;
-            printf("Benar! Uang Anda   : %d Juta\n\n", uang);
-        } else {
-            printf("Salah! Anda tereliminasi.\n");
-            printf("Skor akhir      : %d Juta\n", uang);
-            printf("Silakan coba lagi!\n");
-            printf("===================================================\n");
-            return 0;  // Game berakhir jika salah
-        }
-    }
+                    
+            if (!flag)
+                continue;
 
-    // Jeda 5 detik sebelum soal berikutnya
-        printf("Jeda 5 detik sebelum soal berikutnya...\n\n");
-        sleep(5);
-    }
+            if (jawabanPengguna == kumpulanSoal[idx[i]].jawaban) 
+            {
+                uang += 1000000;
+                printf("Jawaban Anda benar. Tekan n untuk melanjutkan..");
+                
+                char lanjut;
+                do{
+                    lanjut = char_tanpa_buffer();
+                } while(lanjut != 'n');
+                
+                break;
+            }
+
+            else 
+            {
+                clear_terminal();
+                printf("\nJawaban anda salah! Permainan berakhir.\n");
+                free(idx);
+                return 0;
+            }
+        }
+    }        
 
     // Jika semua soal dijawab benar
+    clear_terminal();
     printf("Selamat! Anda berhasil menjawab semua soal dengan benar!\n");
     printf("Skor akhir: %d\n", uang);
     printf("===================================================\n");
-
+    free(idx);
+    
     return 0;
-    }
-
+    
 }
