@@ -1,155 +1,179 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <conio.h>
+#include <time.h>
 
-// Konstanta untuk maksimal peserta
-#define MAX_PESERTA 10
-
-// Fungsi untuk tampilan warna (jika terminal mendukung ANSI escape codes)
-#define RED "\033[1;31m"
-#define GREEN "\033[1;32m"
-#define YELLOW "\033[1;33m"
-#define BLUE "\033[1;34m"
-#define CYAN "\033[1;36m"
-#define RESET "\033[0m"
-
-void tampilkanPertanyaan(int nomor) {
-    switch (nomor) {
-        case 1:
-            printf("Pertanyaan 1: Siapa penemu bola lampu?\n");
-            printf("A. Alexander Graham Bell\n");
-            printf("B. Thomas Edison\n");
-            printf("C. Nikola Tesla\n");
-            printf("D. Albert Einstein\n");
-            break;
-        case 2:
-            printf("Pertanyaan 2: Apa ibu kota Prancis?\n");
-            printf("A. Berlin\n");
-            printf("B. Madrid\n");
-            printf("C. Paris\n");
-            printf("D. Roma\n");
-            break;
-        case 3:
-            printf("Pertanyaan 3: Apa rumus fisika untuk energi kinetik?\n");
-            printf("A. E = mc^2\n");
-            printf("B. E_k = 1/2 mv^2\n");
-            printf("C. F = ma\n");
-            printf("D. P = IV\n");
-            break;
-        case 4:
-            printf("Pertanyaan 4: Siapa penulis 'Romeo dan Juliet'?\n");
-            printf("A. Charles Dickens\n");
-            printf("B. Mark Twain\n");
-            printf("C. William Shakespeare\n");
-            printf("D. Jane Austen\n");
-            break;
-        case 5:
-            printf("Pertanyaan 5: Apa planet terdekat dengan matahari?\n");
-            printf("A. Venus\n");
-            printf("B. Mars\n");
-            printf("C. Merkurius\n");
-            printf("D. Bumi\n");
-            break;
-        default:
-            printf("Pertanyaan tidak ditemukan.\n");
-            break;
-    }
+// Fungsi untuk membersihkan terminal
+void clear_terminal() {
+    printf("\e[1;1H\e[2J");
 }
 
-int cekJawaban(int nomor, char jawaban) {
-    switch (nomor) {
-        case 1:
-            return (jawaban == 'B' || jawaban == 'b'); 
-        case 2:
-            return (jawaban == 'C' || jawaban == 'c'); 
-        case 3:
-            return (jawaban == 'B' || jawaban == 'b'); 
-        case 4:
-            return (jawaban == 'C' || jawaban == 'c'); 
-        case 5:
-            return (jawaban == 'C' || jawaban == 'c');
-        default:
-            return 0;
-    }
-}
+// Fungsi ini mengisi nilai satu sampai jumlahElemen ke dalam
+// sebuah pointer array dengan urutan acak.
+int *ptrElemenAcak(int jumlahElemen) {
+    int *idx = malloc(jumlahElemen * sizeof(int));
+    int penanda[jumlahElemen];
 
-void tampilkanSkorPeserta(char peserta[][50], int skor[], int jumlahPeserta) {
-    printf("\n" YELLOW "================= HASIL AKHIR =================" RESET "\n");
-    printf(YELLOW "| %-20s | %-15s |\n" RESET, "Nama Peserta", "Skor (Rp juta)");
-    printf(YELLOW "===============================================" RESET "\n");
-    for (int i = 0; i < jumlahPeserta; i++) {
-        printf("| %-20s | %-15d |\n", peserta[i], skor[i] / 1000000);
-    }
-    printf(YELLOW "===============================================\n" RESET);
-}
-
-void tampilkanPemenang(char peserta[][50], int skor[], int jumlahPeserta) {
-    int skorTertinggi = skor[0];
-    int indeksPemenang = 0;
-
-    // Cari skor tertinggi
-    for (int i = 1; i < jumlahPeserta; i++) {
-        if (skor[i] > skorTertinggi) {
-            skorTertinggi = skor[i];
-            indeksPemenang = i;
-        }
+    for (int i = 0; i < jumlahElemen; i++) {
+        penanda[i] = 0; // Inisialisasi ke 0
     }
 
-    printf(GREEN "\n🎉🎊 Pemenangnya adalah: %s 🎊🎉\n" RESET, peserta[indeksPemenang]);
-    printf(CYAN "Dengan skor fantastis sebesar Rp %d juta!\n" RESET, skorTertinggi / 1000000);
-    printf(GREEN "===============================================\n" RESET);
-    printf(RED "🏆 Selamat kepada sang juara! 🏆\n" RESET);
-    printf(GREEN "===============================================\n" RESET);
+    srand(time(NULL));
+    for (int i = 0; i < jumlahElemen; i++) {
+        int indexAcak;
+        do {
+            indexAcak = rand() % jumlahElemen; // Menghasilkan angka acak
+        } while (penanda[indexAcak] == 1); // Ulangi jika angka sudah digunakan
+
+        idx[i] = indexAcak;       // Simpan angka acak yang valid
+        penanda[indexAcak] = 1;   // Menandai angka yang sudah digunakan
+    }
+
+    return idx;
 }
+
+char char_tanpa_buffer() {
+    return _getch();
+}
+
+// Struktur untuk soal
+typedef struct {
+    char *soal;
+    char jawaban;
+} Soal;
 
 int main() {
-    int jumlahPeserta;
-    char peserta[MAX_PESERTA][50];
-    int skor[MAX_PESERTA];
+    int uang = 0;
+    int maxSoal = 10;
+    const char opsi[] = {'a', 'b', 'c', 'd'};
+    char jawabanPengguna;
 
-    printf("Selamat datang di permainan '" CYAN "Siapa yang Ingin Menjadi Jutawan" RESET "'!\n\n");
+    // Kumpulan soal berdasarkan tingkat kesulitan
+    Soal mudah[] = {
+        {"Ibukota Indonesia? \n  a. Banten\n  b. Jakarta\n  c. Medan\n  d. Surabaya", 'b'},
+        {"100 x 3 / 2 = ? \n  a. 160\n  b. 150\n  c. 120\n  d. 130", 'b'},
+        {"Planet terbesar di tata surya? \n  a. Merkurius\n  b. Pluto\n  c. Saturnus\n  d. Jupiter", 'd'},
+        {"Hewan tercepat di dunia?\n  a. Harimau\n  b. Macan\n  c. Singa\n  d. Cheetah", 'd'},
+        {"Lambang kimia untuk air?\n  a. NaCl\n  b. NaOH\n  c. H2O\n  d. O2", 'c'},
+        {"5 x 2 + 10 / 2 = ?\n  a. 16\n  b. 15\n  c. 17\n  d. 12", 'b'},
+        {"Gunung tertinggi di dunia?\n  a. Bromo\n  b. Everest\n  c. Kangchenjunga\n  d. Lhotse", 'b'},
+        {"Danau terbesar di dunia?\n  a. Superior\n  b. Huron\n  c. Kaspia\n  d. Sentani", 'c'},
+        {"Siapa nama presiden pertama Republik Indonesia?\n  a. Megawati Soekarnoputri\n  b. Mohammad Hatta\n  c. B.J. Habibie\n  d. Ir. Soekarno", 'd'},
+        {"Apa nama ibu kota negara Australia?\n  a. Sydney\n  b. Melbourne\n  c. Canberra\n  d. Perth", 'c'}
+    };
 
-    printf("Masukkan jumlah peserta (maksimal %d): ", MAX_PESERTA);
-    scanf("%d", &jumlahPeserta);
+    Soal sedang[] = {
+        {"Siapa penemu lampu pijar?\n a. Alexander Graham Bell\n b. Thomas Edison\n c. Nikola Tesla\n d. Albert Einstein", 'b'},
+        {"Apa nama proses di mana tumbuhan mengubah cahaya matahari menjadi energi?\n a. Fotosintesis\n b. Respirasi\n c. Transpirasi\n d. Fermentasi", 'a'},
+        {"Benua terbesar di dunia adalah...\n a. Afrika\n b. Asia\n c. Amerika Utara\n d. Eropa", 'b'},
+        {"Siapa penyanyi yang dikenal dengan lagu ""My Heart Will Go On""?\n a. Whitney Houston\n b. Celine Dion\n c. Mariah Carey\n d. Adele", 'b'},
+        {"Planet terdekat dengan matahari adalah...\n a. Venus\n b. Mars\n c. Merkurius\n d. Jupiter", 'c'},
+        {"Lagu kebangsaan Indonesia adalah...\n a. Tanah Airku\n b. Indonesia Raya\n c. Garuda Pancasila\n d. Satu Nusa Satu Bangsa", 'b'},
+        {"Sungai terpanjang di dunia adalah...\n a. Sungai Amazon\n b. Sungai Nil\n c. Sungai Yangtze\n d. Sungai Mississippi", 'b'},
+        {"Kepulauan yang dikenal sebagai ""Seribu Pulau"" adalah...\n a. Maluku\n b. Bali\n c. Kepulauan Seribu\n d. Nusa Tenggara", 'c'},
+        {"Bunga nasional Indonesia adalah...\n a. Melati\n b. Anggrek\n c. Mawar\n d. Kamboja", 'a'},
+        {"Apa nama unsur kimia dengan simbol Au?\n a. Argentum\n b. Aluminium\n c. Emas\n d. Perak", 'c'}
+    };
 
-    if (jumlahPeserta > MAX_PESERTA || jumlahPeserta <= 0) {
-        printf(RED "Jumlah peserta tidak valid.\n" RESET);
-        return 1;
+    Soal susah[] = {
+        {"Siapa penulis novel ""Laskar Pelangi""?\n a. Andrea Hirata\n b. Pramoedya Ananta Toer\n c. Sapardi Djoko Damono\n d. Chairil Anwar", 'a'},
+        {"Apa nama sistem penulisan yang digunakan oleh suku Maya?\n a. Hieroglif\n b. Cuneiform\n c. Alphabets\n d. Logogram", 'a'},
+        {"Siapa yang menciptakan teori relativitas?\n a. Isaac Newton\n b. Albert Einstein\n c. Niels Bohr\n d. Stephen Hawking",'b'},
+        {"Siapa yang dikenal sebagai ""Bapak Pembangunan"" di Indonesia?\n a. Sukarno\n b. Suharto\n c. B.J. Habibie\n d. Megawati Soekarnoputri", 'b'},
+        {"Apa nama candi terbesar di Indonesia?\n a. Candi Borobudur\n b. Candi Prambanan\n c. Candi Mendut\n d. Candi Sewu", 'a'},
+        {"Apa nama teori yang menjelaskan asal usul kehidupan di bumi?\n a. Teori Evolusi\n b. Teori Big Bang\n c. Teori Abiogenesis\n d. Teori Relativitas", 'c'},
+        {"Siapa yang menulis buku ""Siti Nurbaya""?\n a. Hamka\n b. Marah Rusli\n c. Pramoedya Ananta Toer\n d. Chairil Anwar", 'b'},
+        {"Apa nama teori yang menyatakan bahwa semua spesies berasal dari spesies lain melalui proses evolusi?\n a. Teori Kreasionisme\n b. Teori Evolusi\n c. Teori Spesiasi\n d. Teori Adaptasi", 'b'},
+        {"Apa nama perjanjian yang mengakhiri Perang Dunia I?\n a. Perjanjian Versailles\n b. Perjanjian Trianon\n c. Perjanjian Saint-Germain\n d. Perjanjian Paris", 'a'},
+        {"Siapa ilmuwan yang mengembangkan hukum gravitasi?\n a. Galileo Galilei\n b. Isaac Newton\n c. Albert Einstein\n d. Johannes Kepler", 'b'},
+        {"Apa nama laut yang memisahkan Indonesia dan Australia?\n a. Laut China Selatan\n b. Laut Tasman\n c. Laut Arafuru\n d. Laut Sulu", 'b'}
+    };
+
+    Soal *kumpulanSoal = NULL;
+
+    // Pilih tingkat kesulitan
+    int pilih;
+    clear_terminal();
+    printf("Pilih kesulitan soal:\n1. Mudah\n2. Sedang\n3. Susah\n>> ");
+    scanf("%d", &pilih);
+
+    switch (pilih) {
+        case 1:
+            kumpulanSoal = mudah;
+            maxSoal = sizeof(mudah) / sizeof(mudah[0]);
+            break;
+        case 2:
+            kumpulanSoal = sedang;
+            maxSoal = sizeof(sedang) / sizeof(sedang[0]);
+            break;
+        case 3:
+            kumpulanSoal = susah;
+            maxSoal = sizeof(susah) / sizeof(susah[0]);
+            break;
+        default:
+            printf("Pilihan tidak valid.\n");
+            return 1;
     }
 
-    for (int i = 0; i < jumlahPeserta; i++) {
-        skor[i] = 0; // Inisialisasi skor
-        printf("\nMasukkan nama peserta %d: ", i + 1);
-        scanf(" %[^\n]s", peserta[i]);
+    // Acak soal
+    int *idx = ptrElemenAcak(maxSoal);
 
-        for (int j = 1; j <= 5; j++) {
-            char jawaban;
-            tampilkanPertanyaan(j);
-            printf("Masukkan jawaban Anda (A/B/C/D): ");
-            scanf(" %c", &jawaban);
+    // Main loop
+    for (int i = 0; i < maxSoal; i++) {
+        clear_terminal();
+        printf("===================================================\n");
+        printf("Soal %d:\n%s\n", i + 1, kumpulanSoal[idx[i]].soal);
+        printf(">> ");
 
-            if (cekJawaban(j, jawaban)) {
-                printf(GREEN "Jawaban Anda benar!\n\n" RESET);
-                skor[i] += 1000000;
-            } else {
-                printf(RED "Jawaban Anda salah. Jawaban yang benar adalah: " RESET);
-                switch (j) {
-                    case 1: printf("B\n\n"); break;
-                    case 2: printf("C\n\n"); break; 
-                    case 3: printf("B\n\n"); break; 
-                    case 4: printf("C\n\n"); break; 
-                    case 5: printf("C\n\n"); break;
+        // Input jawaban pengguna
+        while (1) {
+            // Ambil jawaban pengguna
+            jawabanPengguna = char_tanpa_buffer();
+
+            // Validasi input
+            int valid = 0;
+            for (int j = 0; j < sizeof(opsi) / sizeof(opsi[0]); j++) {
+                if (jawabanPengguna == opsi[j]) {
+                    valid = 1;
+                    break;
                 }
-                break; // Peserta keluar dari pertanyaan jika salah
+            }
+
+            // Jika input tidak valid, ulangi
+            if (!valid) {
+                printf("\nInput tidak valid. Coba lagi: ");
+                continue;
+            }
+
+            // Cek jawaban pengguna
+            if (jawabanPengguna == kumpulanSoal[idx[i]].jawaban) {
+                uang += 1000;
+                printf("\nJawaban benar! Tekan 'n' untuk lanjut...\n");
+
+                // Tunggu hingga pengguna menekan 'n'
+                char lanjut;
+                do {
+                    lanjut = char_tanpa_buffer();
+                } while (lanjut != 'n');
+
+                break; // Lanjut ke soal berikutnya
+            } else {
+                // Jawaban salah, permainan berakhir
+                printf("\nJawaban salah! Permainan berakhir.\n");
+                printf("Skor akhir: %d\n", uang);
+                free(idx);
+                return 0;
             }
         }
+
     }
-
-    // Tampilkan skor semua peserta
-    tampilkanSkorPeserta(peserta, skor, jumlahPeserta);
-
-    // Tampilkan pemenang
-    tampilkanPemenang(peserta, skor, jumlahPeserta);
+    clear_terminal();
+    printf("Selamat! Anda berhasil menjawab semua soal dengan benar!\n");
+    printf("Skor akhir: %d\n", uang);
+    printf("===================================================\n");
+    free(idx);
 
     return 0;
+
 }
