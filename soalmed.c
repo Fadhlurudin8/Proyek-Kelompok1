@@ -52,7 +52,7 @@ int main() {
     // Kumpulan soal berdasarkan tingkat kesulitan
     Soal mudah[] = {
         {"Ibukota Indonesia? \n  a. Banten\n  b. Jakarta\n  c. Medan\n  d. Surabaya", 'b'},
-        {"100 x 3 / 2 = ? \n  a. 160\n  b. 150\n  c. 120\n  d. 130", 'b'},
+        {"100 x 3 / 0 = ? \n  a. tak hingga\n  b. tak terdefinisi\n  c. 1\n  d. 0", 'b'},
         {"Planet terbesar di tata surya? \n  a. Merkurius\n  b. Pluto\n  c. Saturnus\n  d. Jupiter", 'd'},
         {"Hewan tercepat di dunia?\n  a. Harimau\n  b. Macan\n  c. Singa\n  d. Cheetah", 'd'},
         {"Lambang kimia untuk air?\n  a. NaCl\n  b. NaOH\n  c. H2O\n  d. O2", 'c'},
