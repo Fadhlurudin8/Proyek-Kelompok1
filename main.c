@@ -281,7 +281,7 @@ int main(int argc, char *argv[])
                                 // Jawaban salah, permainan berakhir
                                 clearTerminal();
                                 printf("Jawaban salah! Permainan berakhir.\n");        
-                                if (soalBenar == 0) printf("Anda gagal menjawab satu soal dengan benar!\n", soalBenar);
+                                if (soalBenar == 0) printf("Anda gagal menjawab satu soal dengan benar!\n");
                                 else printf("Anda berhasil menjawab %d soal dengan benar!\n", soalBenar);
                                 printf("Skor akhir: %d\n", skor);
                                 free(ptrUrutanSoal);
