@@ -8,7 +8,7 @@ Disini kami membuat sebuah program permainan tiruan yang berjudul "WHO WANTS TO 
 
 3. Lakukan sign up dengan cara menjalankan hasil compile main.c. Jalankan perintah berikut: ./main
 
-4. User akan diminta untuk memasukkan username dan password. Perhatikan bahwa username memiliki batas sampai dengan 20 karakter dan password sampai dengan 10 karakter. Keduanya tidak boleh memiliki whitespace(' ', '\n', '\t') atau harus dalam satu kata. Contoh:
+4. User akan diminta untuk memasukkan username dan password. Perhatikan bahwa username memiliki batas sampai dengan 20 karakter dan password sampai dengan 10 karakter. Keduanya tidak boleh memiliki whitespace('  ', '\n', '\t') atau harus dalam satu kata. Contoh:
 Username: makanbang51
 password: gakmau52
 
