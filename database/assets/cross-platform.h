@@ -1,8 +1,3 @@
-// Fungsi untuk membersihkan terminal
-void clearTerminal() {
-    printf("\e[1;1H\e[2J");
-}
-
 // Platform Windows
 #ifdef _WIN32
     #include <conio.h>
