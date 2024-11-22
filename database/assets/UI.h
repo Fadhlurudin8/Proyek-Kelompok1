@@ -44,3 +44,9 @@ void peraturan()
     printf("                                     Kembali(y)\n");
     printf(">> ");
 }
+
+void tampilSkor(int skor) {
+    printf("\n"YELLOW "======== HASIL AKHIR ========\n" RESET);
+    printf(YELLOW "|         Skor: %d          |\n" RESET, skor);
+    printf(YELLOW "=============================\n" RESET);
+}
