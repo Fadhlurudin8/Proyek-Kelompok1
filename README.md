@@ -18,6 +18,6 @@ Contoh: ./main makanbang51 gakmau52
 6. Aturan bermain dapat dilihat setelah masuk ke menu utama permainan dengan memilih opsi nomor 2
 
 Spesifikasi yang dibutuhkan:
-program ini membutuhkan terminal yang mendukung escape ansi sequence.
+program ini membutuhkan terminal yang mendukung escape ANSI sequence.
 
 Selamat bermain ^_^
