@@ -12,8 +12,7 @@ Disini kami membuat sebuah program permainan tiruan yang berjudul "WHO WANTS TO 
 Username: makanbang51
 Password: gakmau52
 
-5. Jika sign up berhasil, lakukan sign in dengan format: 
-./main <username> <password>
+5. Jika sign up berhasil, lakukan sign in dengan format: ./main <username> <password>
 Contoh: ./main makanbang51 gakmau52
 
 6. Aturan bermain dapat dilihat setelah masuk ke menu utama permainan dengan memilih opsi nomor 2
