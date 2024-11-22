@@ -20,17 +20,12 @@ typedef struct
 
 int main(int argc, char *argv[])
 {
-    // Pembuatan akun
+    // Sign up
     if (argc == 1){
         clearTerminal();
-        printf("\n=== PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n\n");
-        printf("                   |SIGN UP|                 \n\n");
-        printf("===============================================\n");
-        printf("*                  Petunjuk:                  *\n");
-        printf("* Username dan password harus dalam satu kata *\n");
-        printf("* (tanpa   spasi).   Username   maksimal   20 *\n");
-        printf("* karakter dan password maksimal 10 karakter. *\n");
-        printf("===============================================\n\n");
+        kepalaProgram();
+        petunjukSignup();
+        printf("\n");
         
         FILE *flogin = bukaFile("database/login.bin", "wb"); // mengakses file biner dalam mode tulis
 
@@ -53,9 +48,8 @@ int main(int argc, char *argv[])
 
         // Akun berhasil dibuat
         clearTerminal();
-        printf("\n=== PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n\n");
         printf("=======================================\n");
-        printf("| SIGN UP SUCCESS: Akun terverifikasi |\n");
+        printf("| "GREEN"SIGN UP SUCCESS:"RESET" Akun terverifikasi |\n");
         printf("=======================================\n\n");
 
         return 0;
@@ -74,7 +68,7 @@ int main(int argc, char *argv[])
         if (strcmp(argv[1], akunku.username) != 0 || strcmp(argv[2], akunku.password) != 0)
         {   
             clearTerminal();
-            printf("\nSIGN IN FAILED: Username/password anda salah\n  Baca selengkapnya di README.md\n\n"); 
+            printf(RED"\nSIGN IN FAILED:"RESET" Username/password anda salah \nBaca selengkapnya di README.md\n\n"); 
             fclose(flogin);
             return 1;
         }
@@ -103,7 +97,7 @@ int main(int argc, char *argv[])
 
                     // Pilih tingkat kesulitan
                     clearTerminal();
-                    printf("Pilih kesulitan soal:\n1. Mudah\n2. Sedang\n3. Susah\n\nMenu Utama(y)\n>> ");
+                    tingkatKesulitan();
                     char pilih;
 
                     do{
@@ -183,8 +177,6 @@ int main(int argc, char *argv[])
                                 else printf("Anda berhasil menjawab %d soal dengan benar!\n", soalBenar);
                                 tampilSkor(skor);
                                 free(ptrUrutanSoal);
-                                printf("Menu Utama(y)          \n");
-                                printf(">> ");
                                 char kembali;
                                 do{kembali = charTanpaBuffer();} while(kembali != 'y' && kembali != 'Y');
                                 break;
@@ -206,8 +198,7 @@ int main(int argc, char *argv[])
                         printf(GREEN"Selamat! Anda berhasil menjawab semua soal dengan benar!\n"RESET);
                         tampilSkor(skor);
                         free(ptrUrutanSoal);
-                        printf("Menu Utama(y)          \n");
-                        printf(">> ");
+                        
                         // Kembali ke menu utama
                         char kembali = charTanpaBuffer();
                         if (kembali == 'y' || kembali == 'Y') {
@@ -243,8 +234,8 @@ int main(int argc, char *argv[])
             fclose(flogin);
             clearTerminal();
             printf("\n==================================\n");
-            printf("* Senang bermain dengan Anda ^_^ *\n");
-            printf("==================================\n\n");
+            printf(  "* Senang bermain dengan Anda ^_^ *\n");
+            printf(  "==================================\n\n");
         }
     }
 
@@ -252,7 +243,7 @@ int main(int argc, char *argv[])
     else
     {
         clearTerminal();
-        printf("\nERROR:\n  Format login: ./<Nama Program> <Username> <Password>\n  Baca selengkapnya di README.md\n\n"); // 
+        printf(RED"\nERROR:"RESET" \nFormat login: ./<Nama Program> <Username> <Password> \nBaca selengkapnya di README.md\n\n"); // 
     }
 
     return 0;
@@ -267,8 +258,8 @@ char *ptrInputString(const char identitas[], int batasPanjangInput)
     char *input = malloc(batasPanjangInput + 1);
     if (input == NULL) {
         printf("\n======================================\n");
-        printf("| ERROR: Gagal mengalokasikan memori |\n");
-        printf("======================================\n\n");
+        printf("  | "RED"ERROR:"RESET" Gagal mengalokasikan memori |\n");
+        printf("  ======================================\n\n");
         exit(1);
     }
 
@@ -283,8 +274,8 @@ char *ptrInputString(const char identitas[], int batasPanjangInput)
     if (strlen(input) == 0) {
         clearTerminal();
         printf("\n======================================\n");
-        printf("| ERROR: %s tidak boleh kosong |\n", identitas);
-        printf("======================================\n\n");
+        printf("  | "RED"ERROR:"RESET" %s tidak boleh kosong |\n", identitas);
+        printf("  ======================================\n\n");
         free(input);
         exit(1);
     }
@@ -293,8 +284,8 @@ char *ptrInputString(const char identitas[], int batasPanjangInput)
     if (strchr(input, ' ') != NULL){
         clearTerminal();
         printf("\n==================================================\n");
-        printf("| SIGN UP FAILED: %s harus dalam satu kata |   \n", identitas);
-        printf("==================================================\n\n");
+        printf(  "| "RED"SIGN UP FAILED:"RESET" %s harus dalam satu kata |   \n", identitas);
+        printf(  "==================================================\n\n");
         free(input);
         exit(1);
     }
@@ -303,9 +294,9 @@ char *ptrInputString(const char identitas[], int batasPanjangInput)
     if (strlen(input) > batasPanjangInput) {
         clearTerminal();
         printf("\n==============================================\n");
-        printf("| SIGN UP FAILED: %s tidak boleh lebih |\n", identitas);
-        printf("|                 dari %d karakter           |\n", batasPanjangInput);
-        printf("==============================================\n\n");
+        printf(  "| "RED"SIGN UP FAILED:"RESET" %s tidak boleh lebih       |\n", identitas);
+        printf(  "|                 dari %d karakter           |\n", batasPanjangInput);
+        printf(  "==============================================\n\n");
         free(input);
         exit(1);
     }
@@ -320,8 +311,8 @@ FILE *bukaFile(char *namaFile, char *modeFile)
     // File gagal diakses
     if ((file = fopen(namaFile, modeFile)) == NULL){
             printf("\n==============================\n");
-            printf("| ERROR: Gagal membuka file! |\n");
-            printf("==============================\n\n");
+            printf(  "| "RED"ERROR:"RESET" Gagal membuka file! |\n");
+            printf(  "==============================\n\n");
             exit(1);
         }
 
@@ -341,8 +332,8 @@ int *ptrElemenAcak(int jumlahElemen) {
     int *ptrIndex = malloc(jumlahElemen * sizeof(int));
     if (ptrIndex == NULL) {
         printf("\n======================================\n");
-        printf("| ERROR: Gagal mengalokasikan memori |\n");
-        printf("======================================\n\n");
+        printf(  "| "RED"ERROR:"RESET" Gagal mengalokasikan memori |\n");
+        printf(  "======================================\n\n");
         exit(1);
     }
 
