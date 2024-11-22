@@ -7,6 +7,7 @@
 #include "database/assets/UI.h"
 
 // prototipe fungsi
+void clearTerminal();
 char *ptrInputString(const char identitas[], int batasPanjangInput);
 FILE *bukaFile(char *namaFile, char *modeFile);
 int *ptrElemenAcak(int jumlahElemen);
@@ -249,7 +250,12 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-/* 1. Fungsi untuk menginput identitas
+// 1. Fungsi untuk membersihkan terminal
+void clearTerminal() {
+    printf("\e[1;1H\e[2J");
+}
+
+/* 2. Fungsi untuk menginput identitas
    Contoh penggunaan: ptrInputString("Nama", 50);
    Contoh di atas akan meminta user untuk menginput nama dengan panjang maksimal 50 */
 char *ptrInputString(const char identitas[], int batasPanjangInput)
@@ -304,7 +310,7 @@ char *ptrInputString(const char identitas[], int batasPanjangInput)
     return input;
 }
 
-// 2. Fungsi untuk mengakses file dan menentukan mode eksekusi
+// 3. Fungsi untuk mengakses file dan menentukan mode eksekusi
 FILE *bukaFile(char *namaFile, char *modeFile)
 {
     FILE *file;
@@ -319,7 +325,7 @@ FILE *bukaFile(char *namaFile, char *modeFile)
     return file;
 }
 
-// 3. Fungsi ini mengisi nilai nol sampai jumlahElemen - 1 ke dalam
+// 4. Fungsi ini mengisi nilai nol sampai jumlahElemen - 1 ke dalam
 // sebuah pointer array dengan urutan acak.
 int *ptrElemenAcak(int jumlahElemen) {
     // Gunakan variabel statis untuk memastikan srand hanya dipanggil sekali
