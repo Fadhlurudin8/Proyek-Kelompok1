@@ -287,8 +287,9 @@ int main(int argc, char *argv[])
                                 free(ptrUrutanSoal);
                                 printf("\nMenu Utama(y)          \n");
                                 printf(">> ");
-                                char kembali = charTanpaBuffer();
-                                if (kembali == 'y' || kembali == 'Y') break;
+                                char kembali;
+                                do{kembali = charTanpaBuffer();} while(kembali != 'y' && kembali != 'Y');
+                                break;
                             }
                         }
 
