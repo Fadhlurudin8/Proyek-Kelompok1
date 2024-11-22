@@ -6,7 +6,7 @@
 #include "database/assets/soal.h"
 #include "database/assets/UI.h"
 
-/* Fungsi untuk menginput identitas
+/* 1. Fungsi untuk menginput identitas
    Contoh penggunaan: ptrInputString("Nama", 50);
    Contoh di atas akan meminta user untuk menginput nama dengan panjang maksimal 50 */
 char *ptrInputString(const char identitas[], int batas_panjang_input)
@@ -61,7 +61,7 @@ char *ptrInputString(const char identitas[], int batas_panjang_input)
     return input;
 }
 
-// Fungsi untuk mengakses file dan menentukan mode eksekusi
+// 2. Fungsi untuk mengakses file dan menentukan mode eksekusi
 FILE *bukaFile(char *nama_file, char *mode_file)
 {
     FILE *file;
@@ -76,7 +76,7 @@ FILE *bukaFile(char *nama_file, char *mode_file)
     return file;
 }
 
-// Fungsi ini mengisi nilai nol sampai jumlahElemen - 1 ke dalam
+// 3. Fungsi ini mengisi nilai nol sampai jumlahElemen - 1 ke dalam
 // sebuah pointer array dengan urutan acak.
 int *ptrElemenAcak(int jumlahElemen) {
     // Gunakan variabel statis untuk memastikan srand hanya dipanggil sekali
@@ -267,7 +267,7 @@ int main(int argc, char *argv[])
                             if (jawabanPengguna == kumpulanSoal[ptrUrutanSoal[nomorSoal - 1]].jawaban) {
                                 soalBenar += 1;
                                 skor += 10;
-                                printf("Jawaban benar! Tekan n untuk lanjut...");
+                                printf(GREEN"Jawaban benar! Tekan n untuk lanjut..."RESET);
 
                                 // Tunggu hingga pengguna menekan 'n'
                                 char lanjut;
@@ -279,13 +279,12 @@ int main(int argc, char *argv[])
                             
                             else {
                                 // Jawaban salah, permainan berakhir
-                                clearTerminal();
-                                printf("Jawaban salah! Permainan berakhir.\n");        
+                                printf(RED"Jawaban salah!"RESET GREEN" Jawaban yang benar adalah %c. \nPermainan berakhir.\n"RESET, kumpulanSoal[ptrUrutanSoal[nomorSoal - 1]].jawaban);
                                 if (soalBenar == 0) printf("Anda gagal menjawab satu soal dengan benar!\n");
                                 else printf("Anda berhasil menjawab %d soal dengan benar!\n", soalBenar);
-                                printf("Skor akhir: %d\n", skor);
+                                tampilSkor(skor);
                                 free(ptrUrutanSoal);
-                                printf("\nMenu Utama(y)          \n");
+                                printf("Menu Utama(y)          \n");
                                 printf(">> ");
                                 char kembali;
                                 do{kembali = charTanpaBuffer();} while(kembali != 'y' && kembali != 'Y');
@@ -305,10 +304,10 @@ int main(int argc, char *argv[])
                     // Berhasil menjawab semua soal dengan benar
                     if (soalBenar == maxSoal){
                         clearTerminal();
-                        printf("Selamat! Anda berhasil menjawab semua soal dengan benar!\n");
-                        printf("Skor akhir: %d\n", skor);
+                        printf(GREEN"Selamat! Anda berhasil menjawab semua soal dengan benar!\n"RESET);
+                        tampilSkor(skor);
                         free(ptrUrutanSoal);
-                        printf("\nMenu Utama(y)          \n");
+                        printf("Menu Utama(y)          \n");
                         printf(">> ");
                         // Kembali ke menu utama
                         char kembali = charTanpaBuffer();
