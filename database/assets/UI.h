@@ -13,6 +13,17 @@ void kepalaProgram()
     printf("\n=== PROYEK PRAKTIKUM PEMROGRAMAN KELOMPOK 1 ===\n\n\n\n");
 }
 
+void petunjukSignup()
+{
+    printf("                   |SIGN UP|                 \n\n");
+    printf("===============================================\n");
+    printf("*                  Petunjuk:                  *\n");
+    printf("* Username dan password harus dalam satu kata *\n");
+    printf("* (tanpa   spasi).   Username   maksimal   20 *\n");
+    printf("* karakter dan password maksimal 10 karakter. *\n");
+    printf("===============================================\n");
+}
+
 void menuUtama()
 {
     printf("        WHO WANTS TO BE A        \n");
@@ -30,7 +41,7 @@ void peraturan()
 {
     printf("================================================\n");
     printf("|                                              |\n");
-    printf("|             |Peraturan Permainan|            |\n");
+    printf("|              Peraturan Permainan             |\n");
     printf("| ============================================ |\n");
     printf("| * 1. Pemain harus menjawab 10 pertanyaan   * |\n");
     printf("| *    pilihan ganda secara berurutan dengan * |\n");
@@ -40,13 +51,27 @@ void peraturan()
     printf("| *    permainan berakhir.                   * |\n");
     printf("| * 3. Skor akhir akan ditampilkan setelah   * |\n");
     printf("| *    permainan berakhir                    * |\n");
-    printf(" ==============================================\n");
-    printf("                                     Kembali(y)\n");
+    printf("================================================\n");
+    printf("                                   Menu Utama(y)\n");
+    printf(">> ");
+}
+
+void tingkatKesulitan()
+{
+    printf("Pilih kesulitan soal:\n");
+    printf("=====================\n");
+    printf("*     "GREEN"1. Mudah"RESET"      *\n");
+    printf("*     "YELLOW"2. Sedang"RESET"     *\n");
+    printf("*     "RED"3. Susah"RESET"      *\n");
+    printf("=====================\n");
+    printf("        Menu Utama(y)\n");
     printf(">> ");
 }
 
 void tampilSkor(int skor) {
-    printf("\n"YELLOW "======== HASIL AKHIR ========\n" RESET);
-    printf(YELLOW "|         Skor: %d          |\n" RESET, skor);
-    printf(YELLOW "=============================\n" RESET);
+    printf(YELLOW "\n======== HASIL AKHIR ========\n"RESET);
+    printf(YELLOW   "|         Skor: %-2d          |\n" RESET, skor);
+    printf(YELLOW   "=============================\n" RESET);
+    printf(         "                Menu Utama(y)\n");
+    printf(         ">> ");
 }
