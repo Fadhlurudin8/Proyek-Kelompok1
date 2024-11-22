@@ -6,111 +6,10 @@
 #include "database/assets/soal.h"
 #include "database/assets/UI.h"
 
-/* 1. Fungsi untuk menginput identitas
-   Contoh penggunaan: ptrInputString("Nama", 50);
-   Contoh di atas akan meminta user untuk menginput nama dengan panjang maksimal 50 */
-char *ptrInputString(const char identitas[], int batas_panjang_input)
-{
-    // Mengalokasikan memori untuk mengembalikan inputan
-    char *input = malloc(batas_panjang_input + 1);
-    if (input == NULL) {
-        printf("\n======================================\n");
-        printf("| ERROR: Gagal mengalokasikan memori |\n");
-        printf("======================================\n\n");
-        exit(1);
-    }
-
-    // Input dari user
-    printf("%s: ", identitas); fgets(input, batas_panjang_input + 2, stdin);
-    size_t len = strlen(input);
-    
-    // Menghilangkan '\n' dari inputan fgets()
-    input[strcspn(input, "\n")] = 0;
-
-    // Memastikan input tidak kosong
-    if (strlen(input) == 0) {
-        clearTerminal();
-        printf("\n======================================\n");
-        printf("| ERROR: %s tidak boleh kosong |\n", identitas);
-        printf("======================================\n\n");
-        free(input);
-        exit(1);
-    }
-
-    // Memastikan tidak ada spasi dalam input
-    if (strchr(input, ' ') != NULL){
-        clearTerminal();
-        printf("\n==================================================\n");
-        printf("| SIGN UP FAILED: %s harus dalam satu kata |   \n", identitas);
-        printf("==================================================\n\n");
-        free(input);
-        exit(1);
-    }
-
-    // Memastikan input tidak melebihi batas panjang
-    if (strlen(input) > batas_panjang_input) {
-        clearTerminal();
-        printf("\n==============================================\n");
-        printf("| SIGN UP FAILED: %s tidak boleh lebih |\n", identitas);
-        printf("|                 dari %d karakter           |\n", batas_panjang_input);
-        printf("==============================================\n\n");
-        free(input);
-        exit(1);
-    }
-
-    return input;
-}
-
-// 2. Fungsi untuk mengakses file dan menentukan mode eksekusi
-FILE *bukaFile(char *nama_file, char *mode_file)
-{
-    FILE *file;
-    // File gagal diakses
-    if ((file = fopen(nama_file, mode_file)) == NULL){
-            printf("\n==============================\n");
-            printf("| ERROR: Gagal membuka file! |\n");
-            printf("==============================\n\n");
-            exit(1);
-        }
-
-    return file;
-}
-
-// 3. Fungsi ini mengisi nilai nol sampai jumlahElemen - 1 ke dalam
-// sebuah pointer array dengan urutan acak.
-int *ptrElemenAcak(int jumlahElemen) {
-    // Gunakan variabel statis untuk memastikan srand hanya dipanggil sekali
-    static int sudahDiinisialisasi = 0;
-    if (!sudahDiinisialisasi) {
-        srand(time(NULL)); // Inisialisasi seed acak
-        sudahDiinisialisasi = 1; // Tandai bahwa srand sudah dipanggil
-    }
-
-    int *ptrIndex = malloc(jumlahElemen * sizeof(int));
-    if (ptrIndex == NULL) {
-        printf("\n======================================\n");
-        printf("| ERROR: Gagal mengalokasikan memori |\n");
-        printf("======================================\n\n");
-        exit(1);
-    }
-
-    int penanda[jumlahElemen];
-    for (int i = 0; i < jumlahElemen; i++) {
-        penanda[i] = 0; // Inisialisasi ke 0
-    }
-    
-    for (int i = 0; i < jumlahElemen; i++) {
-        int indexAcak;
-        do {
-            indexAcak = rand() % jumlahElemen; // Menghasilkan angka acak
-        } while (penanda[indexAcak] == 1); // Ulangi jika angka sudah digunakan
-
-        ptrIndex[i] = indexAcak;       // Simpan angka acak yang valid
-        penanda[indexAcak] = 1;   // Menandai angka yang sudah digunakan
-    }
-
-    return ptrIndex;
-}
+// prototipe fungsi
+char *ptrInputString(const char identitas[], int batasPanjangInput);
+FILE *bukaFile(char *namaFile, char *modeFile);
+int *ptrElemenAcak(int jumlahElemen);
 
 // Struct untuk menyimpan akun
 typedef struct
@@ -357,4 +256,110 @@ int main(int argc, char *argv[])
     }
 
     return 0;
+}
+
+/* 1. Fungsi untuk menginput identitas
+   Contoh penggunaan: ptrInputString("Nama", 50);
+   Contoh di atas akan meminta user untuk menginput nama dengan panjang maksimal 50 */
+char *ptrInputString(const char identitas[], int batasPanjangInput)
+{
+    // Mengalokasikan memori untuk mengembalikan inputan
+    char *input = malloc(batasPanjangInput + 1);
+    if (input == NULL) {
+        printf("\n======================================\n");
+        printf("| ERROR: Gagal mengalokasikan memori |\n");
+        printf("======================================\n\n");
+        exit(1);
+    }
+
+    // Input dari user
+    printf("%s: ", identitas); fgets(input, batasPanjangInput + 2, stdin);
+    size_t len = strlen(input);
+    
+    // Menghilangkan '\n' dari inputan fgets()
+    input[strcspn(input, "\n")] = 0;
+
+    // Memastikan input tidak kosong
+    if (strlen(input) == 0) {
+        clearTerminal();
+        printf("\n======================================\n");
+        printf("| ERROR: %s tidak boleh kosong |\n", identitas);
+        printf("======================================\n\n");
+        free(input);
+        exit(1);
+    }
+
+    // Memastikan tidak ada spasi dalam input
+    if (strchr(input, ' ') != NULL){
+        clearTerminal();
+        printf("\n==================================================\n");
+        printf("| SIGN UP FAILED: %s harus dalam satu kata |   \n", identitas);
+        printf("==================================================\n\n");
+        free(input);
+        exit(1);
+    }
+
+    // Memastikan input tidak melebihi batas panjang
+    if (strlen(input) > batasPanjangInput) {
+        clearTerminal();
+        printf("\n==============================================\n");
+        printf("| SIGN UP FAILED: %s tidak boleh lebih |\n", identitas);
+        printf("|                 dari %d karakter           |\n", batasPanjangInput);
+        printf("==============================================\n\n");
+        free(input);
+        exit(1);
+    }
+
+    return input;
+}
+
+// 2. Fungsi untuk mengakses file dan menentukan mode eksekusi
+FILE *bukaFile(char *namaFile, char *modeFile)
+{
+    FILE *file;
+    // File gagal diakses
+    if ((file = fopen(namaFile, modeFile)) == NULL){
+            printf("\n==============================\n");
+            printf("| ERROR: Gagal membuka file! |\n");
+            printf("==============================\n\n");
+            exit(1);
+        }
+
+    return file;
+}
+
+// 3. Fungsi ini mengisi nilai nol sampai jumlahElemen - 1 ke dalam
+// sebuah pointer array dengan urutan acak.
+int *ptrElemenAcak(int jumlahElemen) {
+    // Gunakan variabel statis untuk memastikan srand hanya dipanggil sekali
+    static int sudahDiinisialisasi = 0;
+    if (!sudahDiinisialisasi) {
+        srand(time(NULL)); // Inisialisasi seed acak
+        sudahDiinisialisasi = 1; // Tandai bahwa srand sudah dipanggil
+    }
+
+    int *ptrIndex = malloc(jumlahElemen * sizeof(int));
+    if (ptrIndex == NULL) {
+        printf("\n======================================\n");
+        printf("| ERROR: Gagal mengalokasikan memori |\n");
+        printf("======================================\n\n");
+        exit(1);
+    }
+
+    int penanda[jumlahElemen];
+    for (int i = 0; i < jumlahElemen; i++) {
+        penanda[i] = 0; // Inisialisasi ke 0
+    }
+    
+    for (int i = 0; i < jumlahElemen; i++) {
+        int indexAcak;
+        do {
+            indexAcak = rand() % jumlahElemen; // Menghasilkan angka acak
+        } while (penanda[indexAcak] == 1); // Ulangi jika angka sudah digunakan
+
+        ptrIndex[i] = indexAcak;       // Simpan angka acak yang valid
+        penanda[indexAcak] = 1;   // Menandai angka yang sudah digunakan
+    }
+
+    return ptrIndex;
 }
