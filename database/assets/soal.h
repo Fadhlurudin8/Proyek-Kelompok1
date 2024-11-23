@@ -1,3 +1,9 @@
+// Struktur untuk soal
+typedef struct {
+    char *soal;
+    char jawaban;
+} Soal;
+
 // Kumpulan soal berdasarkan tingkat kesulitan
 Soal mudah[] = {
     {"Ibukota Indonesia? \n a. Banten\n b. Jakarta\n c. Medan\n d. Surabaya", 'b'},
