@@ -141,7 +141,7 @@ int main(int argc, char *argv[])
                     int *ptrUrutanSoal = ptrElemenAcak(maxSoal);
 
                     // Main loop
-                    for (int nomorSoal = 1; nomorSoal <= maxSoal; nomorSoal++) {
+                    for (nomorSoal = 1; nomorSoal <= maxSoal; nomorSoal++) {
                         clearTerminal();
                         printf("===================================================\n");
                         printf("Soal %d:\n%s\n", nomorSoal, kumpulanSoal[ptrUrutanSoal[nomorSoal - 1]].soal);
