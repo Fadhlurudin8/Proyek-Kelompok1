@@ -173,8 +173,8 @@ int main(int argc, char *argv[])
                             
                             else {
                                 // Jawaban salah, permainan berakhir
-                                printf(RED"Jawaban salah!"RESET GREEN" Jawaban yang benar adalah %c. \nPermainan berakhir.\n"RESET, kumpulanSoal[ptrUrutanSoal[nomorSoal - 1]].jawaban);
-                                if (soalBenar == 0) printf("Anda gagal menjawab satu soal dengan benar!\n");
+                                printf(RED"Jawaban salah!"RESET GREEN" Jawaban yang benar adalah %c.\n"RESET"Permainan berakhir.\n", kumpulanSoal[ptrUrutanSoal[nomorSoal - 1]].jawaban);
+                                if (soalBenar == 0) printf("Anda gagal menjawab satu soalpun dengan benar!\n");
                                 else printf("Anda berhasil menjawab %d soal dengan benar!\n", soalBenar);
                                 tampilSkor(skor);
                                 free(ptrUrutanSoal);
