@@ -19,12 +19,6 @@ typedef struct
     char password[11];
 } akun;
 
-// Struktur untuk soal
-typedef struct {
-    char *soal;
-    char jawaban;
-} Soal;
-
 int main(int argc, char *argv[])
 {
     // Sign up
