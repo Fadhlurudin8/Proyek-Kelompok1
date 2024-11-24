@@ -200,7 +200,8 @@ int main(int argc, char *argv[])
                         free(ptrUrutanSoal);
                         
                         // Kembali ke menu utama
-                        char kembali = charTanpaBuffer();
+                        char kembali;
+                        do{kembali = charTanpaBuffer();} while(kembali != 'y' && kembali != 'Y');
                         if (kembali == 'y' || kembali == 'Y') {
                             clearTerminal();
                             kepalaProgram();
