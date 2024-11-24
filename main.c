@@ -358,3 +358,4 @@ int *ptrElemenAcak(int jumlahElemen) {
     }
 
     return ptrIndex;
+}
