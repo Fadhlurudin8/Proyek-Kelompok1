@@ -6,10 +6,9 @@
 #include "database/assets/soal.h"
 #include "database/assets/UI.h"
 
-// prototipe fungsi
 void clearTerminal();
-char *ptrInputString(const char identitas[], int batasPanjangInput);
 FILE *bukaFile(char *namaFile, char *modeFile);
+char *ptrInputString(const char identitas[], int batasPanjangInput);
 int *ptrElemenAcak(int jumlahElemen);
 
 // Struct untuk menyimpan akun
@@ -255,7 +254,22 @@ void clearTerminal() {
     printf("\e[1;1H\e[2J");
 }
 
-/* 2. Fungsi untuk menginput identitas
+// 2. Fungsi untuk mengakses file dan menentukan mode eksekusi
+FILE *bukaFile(char *namaFile, char *modeFile)
+{
+    FILE *file;
+    // File gagal diakses
+    if ((file = fopen(namaFile, modeFile)) == NULL){
+            printf("\n==============================\n");
+            printf(  "| "RED"ERROR:"RESET" Gagal membuka file! |\n");
+            printf(  "==============================\n\n");
+            exit(1);
+        }
+
+    return file;
+}
+
+/* 3. Fungsi untuk menginput identitas
    Contoh penggunaan: ptrInputString("Nama", 50);
    Contoh di atas akan meminta user untuk menginput nama dengan panjang maksimal 50 */
 char *ptrInputString(const char identitas[], int batasPanjangInput)
@@ -310,21 +324,6 @@ char *ptrInputString(const char identitas[], int batasPanjangInput)
     return input;
 }
 
-// 3. Fungsi untuk mengakses file dan menentukan mode eksekusi
-FILE *bukaFile(char *namaFile, char *modeFile)
-{
-    FILE *file;
-    // File gagal diakses
-    if ((file = fopen(namaFile, modeFile)) == NULL){
-            printf("\n==============================\n");
-            printf(  "| "RED"ERROR:"RESET" Gagal membuka file! |\n");
-            printf(  "==============================\n\n");
-            exit(1);
-        }
-
-    return file;
-}
-
 // 4. Fungsi ini mengisi nilai nol sampai jumlahElemen - 1 ke dalam
 // sebuah pointer array dengan urutan acak.
 int *ptrElemenAcak(int jumlahElemen) {
@@ -359,4 +358,3 @@ int *ptrElemenAcak(int jumlahElemen) {
     }
 
     return ptrIndex;
-}
