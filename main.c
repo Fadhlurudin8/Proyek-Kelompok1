@@ -177,8 +177,8 @@ int main(int argc, char *argv[])
                                 else printf("Anda berhasil menjawab %d soal dengan benar!\n", soalBenar);
                                 tampilSkor(skor);
                                 free(ptrUrutanSoal);
-                                char kembali;
-                                do{kembali = charTanpaBuffer();} while(kembali != 'y' && kembali != 'Y');
+                                char kembali1;
+                                do{kembali1 = charTanpaBuffer();} while(kembali1 != 'y' && kembali1 != 'Y');
                                 break;
                             }
                         }
@@ -200,14 +200,12 @@ int main(int argc, char *argv[])
                         free(ptrUrutanSoal);
                         
                         // Kembali ke menu utama
-                        char kembali;
-                        do{kembali = charTanpaBuffer();} while(kembali != 'y' && kembali != 'Y');
-                        if (kembali == 'y' || kembali == 'Y') {
+                        char kembali2;
+                        do{kembali2 = charTanpaBuffer();} while(kembali2 != 'y' && kembali != 'Y');
                             clearTerminal();
                             kepalaProgram();
                             menuUtama();
                             continue;
-                        }
                     }
                 }
 
