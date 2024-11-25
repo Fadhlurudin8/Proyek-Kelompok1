@@ -286,7 +286,6 @@ char *ptrInputString(const char identitas[], int batasPanjangInput)
 
     // Input dari user
     printf("%s: ", identitas); fgets(input, batasPanjangInput + 2, stdin);
-    size_t len = strlen(input);
     
     // Menghilangkan '\n' dari inputan fgets()
     input[strcspn(input, "\n")] = 0;
