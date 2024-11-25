@@ -201,7 +201,7 @@ int main(int argc, char *argv[])
                         
                         // Kembali ke menu utama
                         char kembali2;
-                        do{kembali2 = charTanpaBuffer();} while(kembali2 != 'y' && kembali != 'Y');
+                        do{kembali2 = charTanpaBuffer();} while(kembali2 != 'y' && kembali2 != 'Y');
                             clearTerminal();
                             kepalaProgram();
                             menuUtama();
